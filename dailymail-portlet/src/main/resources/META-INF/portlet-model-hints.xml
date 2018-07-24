@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.mir.news.model.Article">
+		<field name="articleId" type="long" />
+		<field name="authorId" type="long" />
+		<field name="name" type="String" />
+		<field name="text" type="String" />
+		<field name="status" type="String" />
+	</model>
+	<model name="com.mir.news.model.Review">
+		<field name="reviewId" type="long" />
+		<field name="reviewerId" type="long" />
+		<field name="name" type="String" />
+		<field name="text" type="String" />
+	</model>
+</model-hints>

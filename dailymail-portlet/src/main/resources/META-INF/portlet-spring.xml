@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.mir.news.service.ArticleLocalService" class="com.mir.news.service.impl.ArticleLocalServiceImpl" />
+	<bean id="com.mir.news.service.ArticleService" class="com.mir.news.service.impl.ArticleServiceImpl" />
+	<bean id="com.mir.news.service.persistence.ArticlePersistence" class="com.mir.news.service.persistence.ArticlePersistenceImpl" parent="basePersistence" />
+	<bean id="com.mir.news.service.ReviewLocalService" class="com.mir.news.service.impl.ReviewLocalServiceImpl" />
+	<bean id="com.mir.news.service.ReviewService" class="com.mir.news.service.impl.ReviewServiceImpl" />
+	<bean id="com.mir.news.service.persistence.ReviewPersistence" class="com.mir.news.service.persistence.ReviewPersistenceImpl" parent="basePersistence" />
+</beans>
