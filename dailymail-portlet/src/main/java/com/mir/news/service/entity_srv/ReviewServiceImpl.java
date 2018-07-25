@@ -1,10 +1,8 @@
 package com.mir.news.service.entity_srv;
 
 import java.util.List;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
-
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -17,93 +15,96 @@ import com.mir.news.service.ReviewLocalServiceUtil;
 
 
 public class ReviewServiceImpl implements ReviewSrv {
-	
-	private static ReviewServiceImpl reviewSrv = null;
 
-	private ReviewServiceImpl() {
-	}
+  private static ReviewServiceImpl reviewSrv = null;
 
-	public static ReviewServiceImpl getInstance() {
-		
-		if (reviewSrv == null) {
-			reviewSrv = new ReviewServiceImpl();
-		}
-		return reviewSrv;
-	}
+  private ReviewServiceImpl() {}
 
-	@Override
-	public Review create(ActionRequest actionRequest) throws SystemException, NumberFormatException, PortalException {
+  public static ReviewServiceImpl getInstance() {
 
-		String reviewName = actionRequest.getParameter("name");
-		String reviewText = actionRequest.getParameter("text");
-		String articleId = actionRequest.getParameter("articleId");
+    if (reviewSrv == null) {
+      reviewSrv = new ReviewServiceImpl();
+    }
+    return reviewSrv;
+  }
 
-		long reiviewId = CounterLocalServiceUtil.increment(Review.class.getName());
-		Review review = ReviewLocalServiceUtil.createReview(reiviewId);
-		review.setName(reviewName);
-		review.setText(reviewText);
+  @Override
+  public Review create(ActionRequest actionRequest) throws SystemException, NumberFormatException,
+      PortalException {
 
-		ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-		long userID = themeDisp.getUserId();
+    String reviewName = actionRequest.getParameter("name");
+    String reviewText = actionRequest.getParameter("text");
+    String articleId = actionRequest.getParameter("articleId");
 
-		Article article = ArticleLocalServiceUtil.getArticle(Long.parseLong(articleId));
+    long reiviewId = CounterLocalServiceUtil.increment(Review.class.getName());
+    Review review = ReviewLocalServiceUtil.createReview(reiviewId);
+    review.setName(reviewName);
+    review.setText(reviewText);
 
-		review.setReviewerId(userID);
-		review = ReviewLocalServiceUtil.addReview(review);
-		ReviewLocalServiceUtil.addArticleReview(article.getArticleId(), review.getReviewId());
+    ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+    long userID = themeDisp.getUserId();
 
-		return review;
-	}
+    Article article = ArticleLocalServiceUtil.getArticle(Long.parseLong(articleId));
 
-	@Override
-	public Review delete(ActionRequest actionRequest) throws NumberFormatException, PortalException, SystemException {
+    review.setReviewerId(userID);
+    review = ReviewLocalServiceUtil.addReview(review);
+    ReviewLocalServiceUtil.addArticleReview(article.getArticleId(), review.getReviewId());
 
-		String reviewId = actionRequest.getParameter("reviewId");
-		//System.out.println(reviewId);
-		if (reviewId != null) {
-			Review review = ReviewLocalServiceUtil.deleteReview(Long.parseLong(reviewId));
-			return review;
-		}
-		return null;
-	}
+    return review;
+  }
 
-	@Override
-	public Review update(ActionRequest actionRequest) throws SystemException, NumberFormatException, PortalException {
+  @Override
+  public Review delete(ActionRequest actionRequest) throws NumberFormatException, PortalException,
+      SystemException {
 
-		String reviewName = actionRequest.getParameter("name");
-		String reviewText = actionRequest.getParameter("text");
-		String reiviewId = actionRequest.getParameter("reiviewId");
-		if (reiviewId != null) {
-			Review review = ReviewLocalServiceUtil.getReview(Long.parseLong(reiviewId));
-			review.setName(reviewName);
-			review.setText(reviewText);
-			review = ReviewLocalServiceUtil.addReview(review);
-			return review;
-		}
-		return null;
-	}
+    String reviewId = actionRequest.getParameter("reviewId");
+    // System.out.println(reviewId);
+    if (reviewId != null) {
+      Review review = ReviewLocalServiceUtil.deleteReview(Long.parseLong(reviewId));
+      return review;
+    }
+    return null;
+  }
 
-	@Override
-	public Review find(RenderRequest renderRequest) throws NumberFormatException, PortalException, SystemException {
+  @Override
+  public Review update(ActionRequest actionRequest) throws SystemException, NumberFormatException,
+      PortalException {
 
-		String reiviewId = renderRequest.getParameter("reiviewId");
-		if (reiviewId != null) {
-			Review review = ReviewLocalServiceUtil.getReview(Long.parseLong(reiviewId));
-			return review;
-		}
-		return null;
-	}
+    String reviewName = actionRequest.getParameter("name");
+    String reviewText = actionRequest.getParameter("text");
+    String reiviewId = actionRequest.getParameter("reiviewId");
+    if (reiviewId != null) {
+      Review review = ReviewLocalServiceUtil.getReview(Long.parseLong(reiviewId));
+      review.setName(reviewName);
+      review.setText(reviewText);
+      review = ReviewLocalServiceUtil.addReview(review);
+      return review;
+    }
+    return null;
+  }
 
-	@Override
-	public List<Review> findAll() throws SystemException {
+  @Override
+  public Review find(RenderRequest renderRequest) throws NumberFormatException, PortalException,
+      SystemException {
 
-		long reviewCount = ReviewLocalServiceUtil.getReviewsCount();
-		List<Review> reviews = ReviewLocalServiceUtil.getReviews(0, (int) reviewCount);
-		return reviews;
-	}
+    String reiviewId = renderRequest.getParameter("reiviewId");
+    if (reiviewId != null) {
+      Review review = ReviewLocalServiceUtil.getReview(Long.parseLong(reiviewId));
+      return review;
+    }
+    return null;
+  }
 
-	@Override
-	public Review find(ActionRequest request) throws SystemException {
-		return null;
-	}
+  @Override
+  public List<Review> findAll() throws SystemException {
+
+    long reviewCount = ReviewLocalServiceUtil.getReviewsCount();
+    List<Review> reviews = ReviewLocalServiceUtil.getReviews(0, (int) reviewCount);
+    return reviews;
+  }
+
+  @Override
+  public Review find(ActionRequest request) throws SystemException {
+    return null;
+  }
 }

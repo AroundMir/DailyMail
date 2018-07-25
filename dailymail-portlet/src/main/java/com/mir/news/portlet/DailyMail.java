@@ -1,15 +1,14 @@
 package com.mir.news.portlet;
 
 import java.io.IOException;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -31,12 +30,18 @@ public class DailyMail extends MVCPortlet {
 	private final ReviewSrv reviewService = ReviewServiceImpl.getInstance();
 
 	@Override
-	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
+	public void render(RenderRequest renderRequest, RenderResponse renderResponse)  {
 		
 		setArticleAttribute(renderRequest);
 		commonUtil.setCurrentUserRoleName(renderRequest);
 		String viewPath = commonUtil.getViewPath(renderRequest, renderResponse);
-		include(viewPath, renderRequest, renderResponse);
+		try {
+      include(viewPath, renderRequest, renderResponse);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (PortletException e) {
+      e.printStackTrace();
+    }
 	}
 	
 	/**

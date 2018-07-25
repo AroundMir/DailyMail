@@ -10,13 +10,16 @@
 <link rel="stylesheet" type="text/css"
 	href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
 
-<portlet:actionURL name="checkEditingArticles" var="getEditingArticlesURL">
+<portlet:actionURL name="checkEditingArticles"
+	var="getEditingArticlesURL">
 </portlet:actionURL>
 
-<portlet:actionURL name="checkPublishedArticles" var="getPublishedArticlesURL">
+<portlet:actionURL name="checkPublishedArticles"
+	var="getPublishedArticlesURL">
 </portlet:actionURL>
 
-<portlet:actionURL name="checkConfirmationArticles" var="getConfirmationArticlesURL">
+<portlet:actionURL name="checkConfirmationArticles"
+	var="getConfirmationArticlesURL">
 </portlet:actionURL>
 
 <portlet:renderURL var="addArticleURL">
@@ -24,21 +27,49 @@
 </portlet:renderURL>
 
 <c:if test="${currentRole.equalsIgnoreCase(EDITOR)}">
-	<aui:button href="${getPublishedArticlesURL}"
-		value="Published Articles" />
-	<aui:button href="${getConfirmationArticlesURL}"
-		value="Articles on confirmation" />
+	<a href="${getPublishedArticlesURL}">
+		<button type="submit">
+			<liferay-ui:message key="publishedArticles" />
+		</button>
+	</a>
+	<a href="${getConfirmationArticlesURL}">
+		<button type="submit">
+			<liferay-ui:message key="confirmationArticles" />
+		</button>
+	</a>
 </c:if>
+
 <c:if test="${currentRole.equalsIgnoreCase(AUTHOR)}">
-	<aui:button href="${getPublishedArticlesURL}" value="Published Articles" />
-	<aui:button href="${getConfirmationArticlesURL}" value="Articles on confirmation" />
-	<aui:button href="${getEditingArticlesURL}" value="Articles on editing" />
-	<aui:button href="${addArticleURL}" value="Create Article" />
+	<a href="${getPublishedArticlesURL}">
+		<button type="submit">
+			<liferay-ui:message key="publishedArticles" />
+		</button>
+	</a>
+	<a href="${getEditingArticlesURL}">
+		<button type="submit">
+			<liferay-ui:message key="editingArticles" />
+		</button>
+	</a>
+	<a href="${getConfirmationArticlesURL}">
+		<button type="submit">
+			<liferay-ui:message key="confirmationArticles" />
+		</button>
+	</a>
+	<a href="${addArticleURL}">
+		<button type="submit">
+			<liferay-ui:message key="createArticle" />
+		</button>
+	</a>
 </c:if>
+
 <c:if test="${currentRole.equalsIgnoreCase(REVIEWER)}">
-	<aui:button href="${getPublishedArticlesURL}"
-		value="Published Articles" />
+	<a href="${getPublishedArticlesURL}">
+		<button type="submit">
+			<liferay-ui:message key="publishedArticles" />
+		</button>
+	</a>
 </c:if>
+
 <table id="acticleTable" class="acticleTable">
 	<thead>
 		<tr>

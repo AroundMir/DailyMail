@@ -6,11 +6,18 @@
 <portlet:renderURL var="backOnArticleViewURL">
 </portlet:renderURL>
 
-<h3>Article Add</h3>
+<h3>
+	<liferay-ui:message key="articleAdd" />
+</h3>
 
 <aui:form action="${addArticleURL}">
 	<aui:input name="name" type="text" />
 	<aui:input name="text" type="text" />
-	<aui:input type="submit" value="Add Article" name=""></aui:input>
+	<aui:button type="submit">
+	</aui:button>
 </aui:form>
-<aui:button href="${backOnArticleViewURL}" value="Cancel" />
+<a href="${backOnArticleViewURL}">
+	<button type="submit">
+		<liferay-ui:message key="cancel" />
+	</button>
+</a>

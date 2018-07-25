@@ -3,9 +3,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
-	
 </script>
-<portlet:renderURL var="backOnArticleViewURL">
+	<portlet:renderURL var="backOnArticleViewURL">
 </portlet:renderURL>
 
 <script type="text/javascript"
@@ -29,7 +28,7 @@
 				<td>${review.name}</td>
 				<td>${review.text}</td>
 
-				<c:if test="${role == 22510}">
+				<c:if test="${currentRole.equalsIgnoreCase(EDITOR)}">
 					<td><aui:button href="${deleteReviewURL}"
 							value="Delete Review"></aui:button></td>
 				</c:if>
@@ -38,7 +37,11 @@
 	</tbody>
 </table>
 
-<aui:button href="${backOnArticleViewURL}" value="Cancel" />
+<a href="${backOnArticleViewURL}">
+	<button type="submit">
+		<liferay-ui:message key="cancel" />
+	</button>
+</a>
 
 <script>
 	$(document).ready(function() {

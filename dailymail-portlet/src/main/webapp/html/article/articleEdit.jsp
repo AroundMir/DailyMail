@@ -7,12 +7,19 @@
 <portlet:renderURL var="backOnArticleViewURL">
 </portlet:renderURL>
 
-<h3>Article Edit</h3>
+<h3>
+	<liferay-ui:message key="editArticle" />
+</h3>
 
 
 <aui:form action="${editArticleURL}">
 	<aui:input name="name" value="${article.getName()}" type="text" />
 	<aui:input name="text" value="${article.getText()}" type="text" />
-	<aui:input type="submit" value="Save" name=""></aui:input>
+	<aui:button type="submit">
+	</aui:button>
 </aui:form>
-<aui:button href="${backOnArticleViewURL}" value="Cancel" />
+<a href="${backOnArticleViewURL}">
+	<button type="submit">
+		<liferay-ui:message key="cancel" />
+	</button>
+</a>

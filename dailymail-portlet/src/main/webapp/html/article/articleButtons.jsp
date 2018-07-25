@@ -21,8 +21,7 @@
 
 <portlet:renderURL var="editArticleURL">
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
-	<portlet:param name="pageChecker"
-		value="/html/article/articleEdit.jsp" />
+	<portlet:param name="pageChecker" value="/html/article/articleEdit.jsp" />
 </portlet:renderURL>
 
 <portlet:renderURL var="writeReviewURL">
@@ -32,36 +31,78 @@
 
 <portlet:renderURL var="checkReviewsURL">
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
-	<portlet:param name="pageChecker"
-		value="/html/review/reviewsView.jsp" />
+	<portlet:param name="pageChecker" value="/html/review/reviewsView.jsp" />
 </portlet:renderURL>
 
 
 <c:if test="${currentRole.equalsIgnoreCase(AUTHOR)}">
 	<c:if test="${article.getStatus().equalsIgnoreCase('EDITING')}">
-		<aui:button href="${deleteArticleURL}" value="Delete Article"></aui:button>
-		<aui:button href="${editArticleURL}" value="Edit Article"></aui:button>
-		<aui:button href="${sendArticleOnConfirmationURL}"
-			value="Send Article On Confirmation"></aui:button>
+		<a href="${deleteArticleURL}">
+			<button type="submit">
+				<liferay-ui:message key="deleteArticle" />
+			</button>
+		</a>
+		<a href="${editArticleURL}">
+			<button type="submit">
+				<liferay-ui:message key="editArticle" />
+			</button>
+		</a>
+		<a href="${sendArticleOnConfirmationURL}">
+			<button type="submit">
+				<liferay-ui:message key="onConfirmation" />
+			</button>
+		</a>
 	</c:if>
 	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
-		<aui:button href="${checkReviewsURL}" value="Check Reviews"></aui:button>
+		<a href="${checkReviewsURL}">
+			<button type="submit">
+				<liferay-ui:message key="checkReviews" />
+			</button>
+		</a>
 	</c:if>
 </c:if>
 
 <c:if test="${currentRole.equalsIgnoreCase(EDITOR)}">
 	<c:if test="${article.getStatus().equalsIgnoreCase('CONFIRMATION')}">
-		<aui:button href="${deleteArticleURL}" value="Delete Article"></aui:button>
-		<aui:button href="${publishArticleURL}" value="Publish Article"></aui:button>
-		<aui:button href="${rejectArticleURL}" value="Reject Article"></aui:button>
+		<a href="${deleteArticleURL}">
+			<button type="submit">
+				<liferay-ui:message key="deleteArticle" />
+			</button>
+		</a>
+		<a href="${publishArticleURL}">
+			<button type="submit">
+				<liferay-ui:message key="publishArticle" />
+			</button>
+		</a>
+		<a href="${rejectArticleURL}">
+			<button type="submit">
+				<liferay-ui:message key="rejectArticle" />
+			</button>
+		</a>
 	</c:if>
 	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
-		<aui:button href="${checkReviewsURL}" value="Check Reviews"></aui:button>
-		<aui:button href="${rejectArticleURL}" value="Reject Article"></aui:button>
+		<a href="${checkReviewsURL}">
+			<button type="submit">
+				<liferay-ui:message key="checkReviews" />
+			</button>
+		</a>
+		<a href="${rejectArticleURL}">
+			<button type="submit">
+				<liferay-ui:message key="rejectArticle" />
+			</button>
+		</a>
 	</c:if>
 </c:if>
 
 <c:if test="${currentRole.equalsIgnoreCase(REVIEWER)}">
-	<aui:button href="${writeReviewURL}" value="Write Review"></aui:button>
-	<aui:button href="${checkReviewsURL}" value="Check Reviews"></aui:button>
+	<a href="${writeReviewURL}">
+		<button type="submit">
+			<liferay-ui:message key="writeReview" />
+		</button>
+	</a>
+	<a href="${checkReviewsURL}">
+		<button type="submit">
+			<liferay-ui:message key="checkReviews" />
+		</button>
+	</a>
 </c:if>

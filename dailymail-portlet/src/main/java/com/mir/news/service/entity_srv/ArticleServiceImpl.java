@@ -5,7 +5,6 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
 
-import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -13,13 +12,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.mir.news.model.Article;
-import com.mir.news.model.Review;
-import com.mir.news.model.impl.ArticleImpl;
 import com.mir.news.service.ArticleLocalServiceUtil;
-import com.mir.news.service.ArticleService;
-import com.mir.news.service.ArticleServiceUtil;
-import com.mir.news.service.ReviewLocalServiceUtil;
-import com.mir.news.util.CommonUt;
 
 public class ArticleServiceImpl implements ArticleSrv {
 	private static ArticleServiceImpl articleSrv = null;
@@ -34,7 +27,7 @@ public class ArticleServiceImpl implements ArticleSrv {
 		return articleSrv;
 	}
 
-	@Override
+	
 	public Article create(ActionRequest actionRequest) throws SystemException {
 
 		String articleName = actionRequest.getParameter("name");
@@ -54,7 +47,6 @@ public class ArticleServiceImpl implements ArticleSrv {
 		return article;
 	}
 
-	@Override
 	public Article delete(ActionRequest actionRequest) throws NumberFormatException, PortalException, SystemException {
 
 		String articleId = actionRequest.getParameter("articleId");
@@ -65,7 +57,6 @@ public class ArticleServiceImpl implements ArticleSrv {
 		return null;
 	}
 
-	@Override
 	public Article update(ActionRequest actionRequest) throws PortalException, SystemException {
 		
 		String articleName = actionRequest.getParameter("name");
@@ -81,7 +72,6 @@ public class ArticleServiceImpl implements ArticleSrv {
 		return null;
 	}
 
-	@Override
 	public Article find(RenderRequest renderRequest) throws NumberFormatException, PortalException, SystemException {
 
 		String articleId = renderRequest.getParameter("articleId");
@@ -92,7 +82,6 @@ public class ArticleServiceImpl implements ArticleSrv {
 		return null;
 	}
 
-	@Override
 	public List<Article> findAll() throws SystemException {
 
 		long articleCount = ArticleLocalServiceUtil.getArticlesCount();
