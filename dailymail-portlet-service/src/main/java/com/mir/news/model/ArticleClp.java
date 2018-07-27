@@ -216,6 +216,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         }
     }
 
+<<<<<<< HEAD
     @Override
     public java.util.List<com.mir.news.model.Review> getReviews() {
         try {
@@ -234,6 +235,8 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         }
     }
 
+=======
+>>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     public BaseModel<?> getArticleRemoteModel() {
         return _articleRemoteModel;
     }

@@ -24,7 +24,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="/dailymail-portlet-service"/>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+>>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>

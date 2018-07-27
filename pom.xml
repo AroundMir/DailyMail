@@ -51,5 +51,9 @@
 	<modules>
 		<module>dailymail-portlet</module>
 		<module>dailymail-portlet-service</module>
+<<<<<<< HEAD
+=======
+    <module>localization-portlet</module>
+>>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
   </modules>
 </project>

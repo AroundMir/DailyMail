@@ -303,12 +303,15 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
     }
 
     @Override
+<<<<<<< HEAD
     public java.util.List<com.mir.news.model.Review> getReviews()
         throws com.liferay.portal.kernel.exception.SystemException {
         return _article.getReviews();
     }
 
     @Override
+=======
+>>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

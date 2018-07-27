@@ -9,9 +9,17 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
+<<<<<<< HEAD
 	<artifactId>dailymail-portlet</artifactId>
 	<packaging>war</packaging>
 	<name>dailymail Portlet</name>
+=======
+	<groupId>com.mir.news</groupId>
+	<artifactId>dailymail-portlet</artifactId>
+	<packaging>war</packaging>
+	<name>dailymail Portlet</name>
+	<version>0.0.1-SNAPSHOT</version>
+>>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 	<build>
 		<plugins>
 			<plugin>

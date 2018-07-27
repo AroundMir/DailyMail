@@ -40,7 +40,11 @@ public class ArticleUt {
 	public void setPublishedArticles(ActionRequest actionRequest) throws SystemException {
 
 		List<Article> allArticles = articleService.findAll();
+<<<<<<< HEAD
 		List<Article> publishedArticles = new ArrayList<Article>();
+=======
+		List<Article> publishedArticles = new ArrayList<>();
+>>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 		for (Article article : allArticles) {
 			if (ArticleStatus.getStatusByString(article.getStatus()) == ArticleStatus.PUBLISHED) {
 				publishedArticles.add(article);
