@@ -82,7 +82,7 @@ public class ArticlePersistenceImpl extends BasePersistenceImpl<Article>
                 PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
     private static Log _log = LogFactoryUtil.getLog(ArticlePersistenceImpl.class);
     private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-                "text"
+                "text", "date"
             });
     private static Article _nullArticle = new ArticleImpl() {
             @Override
@@ -340,6 +340,7 @@ public class ArticlePersistenceImpl extends BasePersistenceImpl<Article>
         articleImpl.setAuthorId(article.getAuthorId());
         articleImpl.setName(article.getName());
         articleImpl.setText(article.getText());
+        articleImpl.setDate(article.getDate());
         articleImpl.setStatus(article.getStatus());
 
         return articleImpl;

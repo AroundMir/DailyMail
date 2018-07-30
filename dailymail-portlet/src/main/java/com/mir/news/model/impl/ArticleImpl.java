@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.mir.news.service.ReviewLocalServiceUtil;
-import com.mir.news.service.impl.ReviewLocalServiceImpl;
 import com.mir.news.model.Review;
 
 /**
@@ -17,7 +16,7 @@ import com.mir.news.model.Review;
  * @author Brian Wing Shun Chan
  * @param <Review>
  */
-public class ArticleImpl<Review> extends ArticleBaseImpl {
+public class ArticleImpl extends ArticleBaseImpl {
     /*
      * NOTE FOR DEVELOPERS:
      *
@@ -25,7 +24,7 @@ public class ArticleImpl<Review> extends ArticleBaseImpl {
      */
 	
 	public List<Review> getReviews() throws SystemException {
-	    List<Review> articleReviews = (List<Review>) ReviewLocalServiceUtil.getArticleReviews(getArticleId());
+	    List<Review> articleReviews = ReviewLocalServiceUtil.getArticleReviews(getArticleId());
 	    return articleReviews;
 	}
 	

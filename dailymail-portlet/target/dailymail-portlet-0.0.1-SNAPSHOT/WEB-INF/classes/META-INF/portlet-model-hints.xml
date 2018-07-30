@@ -6,12 +6,15 @@
 		<field name="authorId" type="long" />
 		<field name="name" type="String" />
 		<field name="text" type="String" />
+		<field name="date" type="Date" />
 		<field name="status" type="String" />
 	</model>
 	<model name="com.mir.news.model.Review">
 		<field name="reviewId" type="long" />
 		<field name="reviewerId" type="long" />
+		<field name="imgUrl" type="String" />
 		<field name="name" type="String" />
 		<field name="text" type="String" />
+		<field name="date" type="Date" />
 	</model>
 </model-hints>

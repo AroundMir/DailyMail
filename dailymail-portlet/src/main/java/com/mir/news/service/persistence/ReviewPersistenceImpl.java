@@ -82,7 +82,7 @@ public class ReviewPersistenceImpl extends BasePersistenceImpl<Review>
                 PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
     private static Log _log = LogFactoryUtil.getLog(ReviewPersistenceImpl.class);
     private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-                "text"
+                "text", "date"
             });
     private static Review _nullReview = new ReviewImpl() {
             @Override
@@ -337,8 +337,10 @@ public class ReviewPersistenceImpl extends BasePersistenceImpl<Review>
 
         reviewImpl.setReviewId(review.getReviewId());
         reviewImpl.setReviewerId(review.getReviewerId());
+        reviewImpl.setImgUrl(review.getImgUrl());
         reviewImpl.setName(review.getName());
         reviewImpl.setText(review.getText());
+        reviewImpl.setDate(review.getDate());
 
         return reviewImpl;
     }

@@ -3,8 +3,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
+	
 </script>
-	<portlet:renderURL var="backOnArticleViewURL">
+<portlet:renderURL var="backOnArticleViewURL">
 </portlet:renderURL>
 
 <script type="text/javascript"
@@ -15,8 +16,10 @@
 <table id="reviewTable" class="reviewTable">
 	<thead>
 		<tr>
-			<th>Review Title</th>
-			<th>Review Text</th>
+			<th></th>
+			<th><liferay-ui:message key="reviewTitle" /></th>
+			<th><liferay-ui:message key="reviewText" /></th>
+			<th><liferay-ui:message key="date" /></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,9 +28,10 @@
 				<portlet:param name="reviewId" value="${review.getReviewId()}" />
 			</portlet:actionURL>
 			<tr>
+				<td><img src="${review.imgUrl}" alt="NONE"></td>
 				<td>${review.name}</td>
 				<td>${review.text}</td>
-
+				<td>${review.getDate().toString()}</td>
 				<c:if test="${currentRole.equalsIgnoreCase(EDITOR)}">
 					<td><aui:button href="${deleteReviewURL}"
 							value="Delete Review"></aui:button></td>

@@ -420,7 +420,6 @@ public class ArticleLocalServiceWrapper implements ArticleLocalService,
         return _articleLocalService.invokeMethod(name, parameterTypes, arguments);
     }
 
-<<<<<<< HEAD
     @Override
     public java.util.List<com.mir.news.model.Review> getArticleReviews(
         long articleId)
@@ -428,8 +427,6 @@ public class ArticleLocalServiceWrapper implements ArticleLocalService,
         return _articleLocalService.getArticleReviews(articleId);
     }
 
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

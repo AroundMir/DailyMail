@@ -396,15 +396,12 @@ public class ArticleLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-<<<<<<< HEAD
     public static java.util.List<com.mir.news.model.Review> getArticleReviews(
         long articleId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getService().getArticleReviews(articleId);
     }
 
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     public static void clearService() {
         _service = null;
     }

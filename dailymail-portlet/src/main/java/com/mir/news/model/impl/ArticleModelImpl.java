@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,9 +54,10 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
             { "authorId", Types.BIGINT },
             { "name", Types.VARCHAR },
             { "text_", Types.VARCHAR },
+            { "date_", Types.TIMESTAMP },
             { "status", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table article (articleId LONG not null primary key,authorId LONG,name VARCHAR(75) null,text_ VARCHAR(75) null,status VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table article (articleId LONG not null primary key,authorId LONG,name VARCHAR(75) null,text_ VARCHAR(75) null,date_ DATE null,status VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table article";
     public static final String ORDER_BY_JPQL = " ORDER BY article.articleId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY article.articleId ASC";
@@ -90,6 +92,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
     private long _authorId;
     private String _name;
     private String _text;
+    private Date _date;
     private String _status;
     private Article _escapedModel;
 
@@ -113,6 +116,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         model.setAuthorId(soapModel.getAuthorId());
         model.setName(soapModel.getName());
         model.setText(soapModel.getText());
+        model.setDate(soapModel.getDate());
         model.setStatus(soapModel.getStatus());
 
         return model;
@@ -176,6 +180,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         attributes.put("authorId", getAuthorId());
         attributes.put("name", getName());
         attributes.put("text", getText());
+        attributes.put("date", getDate());
         attributes.put("status", getStatus());
 
         return attributes;
@@ -205,6 +210,12 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
 
         if (text != null) {
             setText(text);
+        }
+
+        Date date = (Date) attributes.get("date");
+
+        if (date != null) {
+            setDate(date);
         }
 
         String status = (String) attributes.get("status");
@@ -268,6 +279,17 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
 
     @JSON
     @Override
+    public Date getDate() {
+        return _date;
+    }
+
+    @Override
+    public void setDate(Date date) {
+        _date = date;
+    }
+
+    @JSON
+    @Override
     public String getStatus() {
         if (_status == null) {
             return StringPool.BLANK;
@@ -312,6 +334,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         articleImpl.setAuthorId(getAuthorId());
         articleImpl.setName(getName());
         articleImpl.setText(getText());
+        articleImpl.setDate(getDate());
         articleImpl.setStatus(getStatus());
 
         articleImpl.resetOriginalValues();
@@ -386,6 +409,14 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
             articleCacheModel.text = null;
         }
 
+        Date date = getDate();
+
+        if (date != null) {
+            articleCacheModel.date = date.getTime();
+        } else {
+            articleCacheModel.date = Long.MIN_VALUE;
+        }
+
         articleCacheModel.status = getStatus();
 
         String status = articleCacheModel.status;
@@ -399,7 +430,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(11);
+        StringBundler sb = new StringBundler(13);
 
         sb.append("{articleId=");
         sb.append(getArticleId());
@@ -409,6 +440,8 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         sb.append(getName());
         sb.append(", text=");
         sb.append(getText());
+        sb.append(", date=");
+        sb.append(getDate());
         sb.append(", status=");
         sb.append(getStatus());
         sb.append("}");
@@ -418,7 +451,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(19);
+        StringBundler sb = new StringBundler(22);
 
         sb.append("<model><model-name>");
         sb.append("com.mir.news.model.Article");
@@ -439,6 +472,10 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         sb.append(
             "<column><column-name>text</column-name><column-value><![CDATA[");
         sb.append(getText());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>date</column-name><column-value><![CDATA[");
+        sb.append(getDate());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>status</column-name><column-value><![CDATA[");

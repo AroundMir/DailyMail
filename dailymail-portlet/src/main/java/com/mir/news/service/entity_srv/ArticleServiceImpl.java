@@ -28,6 +28,10 @@ public class ArticleServiceImpl implements ArticleSrv {
 	}
 
 	
+	/**
+	 * Create new Article with status EDITING
+	 */
+	
 	public Article create(ActionRequest actionRequest) throws SystemException {
 
 		String articleName = actionRequest.getParameter("name");
@@ -64,8 +68,12 @@ public class ArticleServiceImpl implements ArticleSrv {
 		String articleId = actionRequest.getParameter("articleId");
 		if (articleId != null) {
 			Article article = ArticleLocalServiceUtil.getArticle(Long.parseLong(articleId));
-			article.setName(articleName);
-			article.setText(articleText);
+			if(articleName != null){
+			  article.setName(articleName);
+			}
+			if(articleText != null){
+              article.setText(articleText);
+            }
 			article = ArticleLocalServiceUtil.updateArticle(article);
 			return article;
 		}

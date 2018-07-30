@@ -9,6 +9,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the Review service. Represents a row in the &quot;review&quot; database table, with each column mapped to a property of this class.
  *
@@ -72,6 +74,21 @@ public interface ReviewModel extends BaseModel<Review> {
     public void setReviewerId(long reviewerId);
 
     /**
+     * Returns the img url of this review.
+     *
+     * @return the img url of this review
+     */
+    @AutoEscape
+    public String getImgUrl();
+
+    /**
+     * Sets the img url of this review.
+     *
+     * @param imgUrl the img url of this review
+     */
+    public void setImgUrl(String imgUrl);
+
+    /**
      * Returns the name of this review.
      *
      * @return the name of this review
@@ -100,6 +117,20 @@ public interface ReviewModel extends BaseModel<Review> {
      * @param text the text of this review
      */
     public void setText(String text);
+
+    /**
+     * Returns the date of this review.
+     *
+     * @return the date of this review
+     */
+    public Date getDate();
+
+    /**
+     * Sets the date of this review.
+     *
+     * @param date the date of this review
+     */
+    public void setDate(Date date);
 
     @Override
     public boolean isNew();

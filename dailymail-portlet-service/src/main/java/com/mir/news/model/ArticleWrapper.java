@@ -3,6 +3,7 @@ package com.mir.news.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
         attributes.put("authorId", getAuthorId());
         attributes.put("name", getName());
         attributes.put("text", getText());
+        attributes.put("date", getDate());
         attributes.put("status", getStatus());
 
         return attributes;
@@ -69,6 +71,12 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
 
         if (text != null) {
             setText(text);
+        }
+
+        Date date = (Date) attributes.get("date");
+
+        if (date != null) {
+            setDate(date);
         }
 
         String status = (String) attributes.get("status");
@@ -176,6 +184,26 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
     @Override
     public void setText(java.lang.String text) {
         _article.setText(text);
+    }
+
+    /**
+    * Returns the date of this article.
+    *
+    * @return the date of this article
+    */
+    @Override
+    public java.util.Date getDate() {
+        return _article.getDate();
+    }
+
+    /**
+    * Sets the date of this article.
+    *
+    * @param date the date of this article
+    */
+    @Override
+    public void setDate(java.util.Date date) {
+        _article.setDate(date);
     }
 
     /**
@@ -303,15 +331,12 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
     }
 
     @Override
-<<<<<<< HEAD
     public java.util.List<com.mir.news.model.Review> getReviews()
         throws com.liferay.portal.kernel.exception.SystemException {
         return _article.getReviews();
     }
 
     @Override
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

@@ -9,6 +9,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the Article service. Represents a row in the &quot;article&quot; database table, with each column mapped to a property of this class.
  *
@@ -100,6 +102,20 @@ public interface ArticleModel extends BaseModel<Article> {
      * @param text the text of this article
      */
     public void setText(String text);
+
+    /**
+     * Returns the date of this article.
+     *
+     * @return the date of this article
+     */
+    public Date getDate();
+
+    /**
+     * Sets the date of this article.
+     *
+     * @param date the date of this article
+     */
+    public void setDate(Date date);
 
     /**
      * Returns the status of this article.

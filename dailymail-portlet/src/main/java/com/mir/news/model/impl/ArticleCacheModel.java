@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing Article in entity cache.
  *
@@ -23,11 +25,12 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
     public long authorId;
     public String name;
     public String text;
+    public long date;
     public String status;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(11);
+        StringBundler sb = new StringBundler(13);
 
         sb.append("{articleId=");
         sb.append(articleId);
@@ -37,6 +40,8 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
         sb.append(name);
         sb.append(", text=");
         sb.append(text);
+        sb.append(", date=");
+        sb.append(date);
         sb.append(", status=");
         sb.append(status);
         sb.append("}");
@@ -63,6 +68,12 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
             articleImpl.setText(text);
         }
 
+        if (date == Long.MIN_VALUE) {
+            articleImpl.setDate(null);
+        } else {
+            articleImpl.setDate(new Date(date));
+        }
+
         if (status == null) {
             articleImpl.setStatus(StringPool.BLANK);
         } else {
@@ -80,6 +91,7 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
         authorId = objectInput.readLong();
         name = objectInput.readUTF();
         text = objectInput.readUTF();
+        date = objectInput.readLong();
         status = objectInput.readUTF();
     }
 
@@ -100,6 +112,8 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
         } else {
             objectOutput.writeUTF(text);
         }
+
+        objectOutput.writeLong(date);
 
         if (status == null) {
             objectOutput.writeUTF(StringPool.BLANK);

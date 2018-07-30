@@ -77,11 +77,8 @@ public class ArticleLocalServiceClpInvoker {
     private String[] _methodParameterTypes56;
     private String _methodName57;
     private String[] _methodParameterTypes57;
-<<<<<<< HEAD
     private String _methodName62;
     private String[] _methodParameterTypes62;
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 
     public ArticleLocalServiceClpInvoker() {
         _methodName0 = "addArticle";
@@ -238,13 +235,10 @@ public class ArticleLocalServiceClpInvoker {
         _methodName57 = "setBeanIdentifier";
 
         _methodParameterTypes57 = new String[] { "java.lang.String" };
-<<<<<<< HEAD
 
         _methodName62 = "getArticleReviews";
 
         _methodParameterTypes62 = new String[] { "long" };
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -463,14 +457,11 @@ public class ArticleLocalServiceClpInvoker {
             return null;
         }
 
-<<<<<<< HEAD
         if (_methodName62.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
             return ArticleLocalServiceUtil.getArticleReviews(((Long) arguments[0]).longValue());
         }
 
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
         throw new UnsupportedOperationException();
     }
 }

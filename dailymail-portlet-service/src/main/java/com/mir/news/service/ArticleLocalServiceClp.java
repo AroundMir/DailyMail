@@ -76,11 +76,8 @@ public class ArticleLocalServiceClp implements ArticleLocalService {
     private String[] _methodParameterTypes32;
     private String _methodName33;
     private String[] _methodParameterTypes33;
-<<<<<<< HEAD
     private String _methodName35;
     private String[] _methodParameterTypes35;
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 
     public ArticleLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -239,13 +236,10 @@ public class ArticleLocalServiceClp implements ArticleLocalService {
         _methodName33 = "setBeanIdentifier";
 
         _methodParameterTypes33 = new String[] { "java.lang.String" };
-<<<<<<< HEAD
 
         _methodName35 = "getArticleReviews";
 
         _methodParameterTypes35 = new String[] { "long" };
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     }
 
     @Override
@@ -1161,7 +1155,6 @@ public class ArticleLocalServiceClp implements ArticleLocalService {
         throws java.lang.Throwable {
         throw new UnsupportedOperationException();
     }
-<<<<<<< HEAD
 
     @Override
     public java.util.List<com.mir.news.model.Review> getArticleReviews(
@@ -1189,6 +1182,4 @@ public class ArticleLocalServiceClp implements ArticleLocalService {
 
         return (java.util.List<com.mir.news.model.Review>) ClpSerializer.translateOutput(returnObj);
     }
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 }

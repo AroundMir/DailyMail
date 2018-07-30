@@ -15,6 +15,10 @@
 			<basic name="text">
 				<column name="TEXT_" />
 			</basic>
+			<basic name="date">
+				<column name="DATE_" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="status" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
@@ -25,9 +29,14 @@
 		<attributes>
 			<id name="reviewId" />
 			<basic name="reviewerId" />
+			<basic name="imgUrl" />
 			<basic name="name" />
 			<basic name="text">
 				<column name="TEXT_" />
+			</basic>
+			<basic name="date">
+				<column name="DATE_" />
+				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

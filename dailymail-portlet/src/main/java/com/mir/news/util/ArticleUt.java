@@ -40,11 +40,7 @@ public class ArticleUt {
 	public void setPublishedArticles(ActionRequest actionRequest) throws SystemException {
 
 		List<Article> allArticles = articleService.findAll();
-<<<<<<< HEAD
 		List<Article> publishedArticles = new ArrayList<Article>();
-=======
-		List<Article> publishedArticles = new ArrayList<>();
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 		for (Article article : allArticles) {
 			if (ArticleStatus.getStatusByString(article.getStatus()) == ArticleStatus.PUBLISHED) {
 				publishedArticles.add(article);
@@ -55,9 +51,9 @@ public class ArticleUt {
 	
 
 	/**
-	 * Get all articles influencing the author by author ID Set articles with
-	 * status 'CONFIRMATION' in request
-	 * 
+	 * Check user Role
+	 * Get all the articles of the user, using the user ID. 
+	 * Set in request articles with status CONFIRMATION.
 	 * @param actionRequest
 	 * @throws SystemException
 	 */
@@ -115,7 +111,7 @@ public class ArticleUt {
 		actionRequest.setAttribute("articles", finalAuthorArticles);
 	}
 	/**
-	 * Set
+	 * Set PUBLISHED status to article
 	 * @param actionRequest
 	 * @return
 	 * @throws NumberFormatException
@@ -132,6 +128,15 @@ public class ArticleUt {
 		return article;
 	}
 	
+	/**
+	 * Set CONFIRMATION status to article
+	 * @param actionRequest
+	 * @return
+	 * @throws NumberFormatException
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	
 	public Article setConfirmationStatus(ActionRequest actionRequest) throws NumberFormatException, PortalException, SystemException {
 
 		String articleId = actionRequest.getParameter("articleId");
@@ -141,6 +146,14 @@ public class ArticleUt {
 		return article;
 	}
 	
+	/**
+	 * Set EDITING status to article
+	 * @param actionRequest
+	 * @return
+	 * @throws NumberFormatException
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 
 	public Article setEditStatus(ActionRequest actionRequest) throws NumberFormatException, PortalException, SystemException {
 
@@ -151,9 +164,8 @@ public class ArticleUt {
 		return article;
 	}
 	
-
 	/**
-	 * get articles by AuthorId
+	 * Get articles by AuthorId
 	 * 
 	 * @param authorId
 	 * @param articles

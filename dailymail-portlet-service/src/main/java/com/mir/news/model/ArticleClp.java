@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
     private long _authorId;
     private String _name;
     private String _text;
+    private Date _date;
     private String _status;
     private BaseModel<?> _articleRemoteModel;
     private Class<?> _clpSerializerClass = com.mir.news.service.ClpSerializer.class;
@@ -68,6 +70,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         attributes.put("authorId", getAuthorId());
         attributes.put("name", getName());
         attributes.put("text", getText());
+        attributes.put("date", getDate());
         attributes.put("status", getStatus());
 
         return attributes;
@@ -97,6 +100,12 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
 
         if (text != null) {
             setText(text);
+        }
+
+        Date date = (Date) attributes.get("date");
+
+        if (date != null) {
+            setDate(date);
         }
 
         String status = (String) attributes.get("status");
@@ -195,6 +204,28 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
     }
 
     @Override
+    public Date getDate() {
+        return _date;
+    }
+
+    @Override
+    public void setDate(Date date) {
+        _date = date;
+
+        if (_articleRemoteModel != null) {
+            try {
+                Class<?> clazz = _articleRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setDate", Date.class);
+
+                method.invoke(_articleRemoteModel, date);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public String getStatus() {
         return _status;
     }
@@ -216,7 +247,6 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         }
     }
 
-<<<<<<< HEAD
     @Override
     public java.util.List<com.mir.news.model.Review> getReviews() {
         try {
@@ -235,8 +265,6 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         }
     }
 
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
     public BaseModel<?> getArticleRemoteModel() {
         return _articleRemoteModel;
     }
@@ -308,6 +336,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         clone.setAuthorId(getAuthorId());
         clone.setName(getName());
         clone.setText(getText());
+        clone.setDate(getDate());
         clone.setStatus(getStatus());
 
         return clone;
@@ -358,7 +387,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(11);
+        StringBundler sb = new StringBundler(13);
 
         sb.append("{articleId=");
         sb.append(getArticleId());
@@ -368,6 +397,8 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         sb.append(getName());
         sb.append(", text=");
         sb.append(getText());
+        sb.append(", date=");
+        sb.append(getDate());
         sb.append(", status=");
         sb.append(getStatus());
         sb.append("}");
@@ -377,7 +408,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(19);
+        StringBundler sb = new StringBundler(22);
 
         sb.append("<model><model-name>");
         sb.append("com.mir.news.model.Article");
@@ -398,6 +429,10 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         sb.append(
             "<column><column-name>text</column-name><column-value><![CDATA[");
         sb.append(getText());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>date</column-name><column-value><![CDATA[");
+        sb.append(getDate());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>status</column-name><column-value><![CDATA[");

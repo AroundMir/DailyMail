@@ -3,6 +3,7 @@ package com.mir.news.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class ArticleSoap implements Serializable {
     private long _authorId;
     private String _name;
     private String _text;
+    private Date _date;
     private String _status;
 
     public ArticleSoap() {
@@ -29,6 +31,7 @@ public class ArticleSoap implements Serializable {
         soapModel.setAuthorId(model.getAuthorId());
         soapModel.setName(model.getName());
         soapModel.setText(model.getText());
+        soapModel.setDate(model.getDate());
         soapModel.setStatus(model.getStatus());
 
         return soapModel;
@@ -108,6 +111,14 @@ public class ArticleSoap implements Serializable {
 
     public void setText(String text) {
         _text = text;
+    }
+
+    public Date getDate() {
+        return _date;
+    }
+
+    public void setDate(Date date) {
+        _date = date;
     }
 
     public String getStatus() {

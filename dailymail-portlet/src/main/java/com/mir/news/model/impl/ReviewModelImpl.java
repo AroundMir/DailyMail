@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +52,12 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
     public static final Object[][] TABLE_COLUMNS = {
             { "reviewId", Types.BIGINT },
             { "reviewerId", Types.BIGINT },
+            { "imgUrl", Types.VARCHAR },
             { "name", Types.VARCHAR },
-            { "text_", Types.VARCHAR }
+            { "text_", Types.VARCHAR },
+            { "date_", Types.TIMESTAMP }
         };
-    public static final String TABLE_SQL_CREATE = "create table review (reviewId LONG not null primary key,reviewerId LONG,name VARCHAR(75) null,text_ VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table review (reviewId LONG not null primary key,reviewerId LONG,imgUrl VARCHAR(75) null,name VARCHAR(75) null,text_ VARCHAR(75) null,date_ DATE null)";
     public static final String TABLE_SQL_DROP = "drop table review";
     public static final String ORDER_BY_JPQL = " ORDER BY review.reviewId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY review.reviewId ASC";
@@ -85,8 +88,10 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
     private static Class<?>[] _escapedModelInterfaces = new Class[] { Review.class };
     private long _reviewId;
     private long _reviewerId;
+    private String _imgUrl;
     private String _name;
     private String _text;
+    private Date _date;
     private Review _escapedModel;
 
     public ReviewModelImpl() {
@@ -107,8 +112,10 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
 
         model.setReviewId(soapModel.getReviewId());
         model.setReviewerId(soapModel.getReviewerId());
+        model.setImgUrl(soapModel.getImgUrl());
         model.setName(soapModel.getName());
         model.setText(soapModel.getText());
+        model.setDate(soapModel.getDate());
 
         return model;
     }
@@ -169,8 +176,10 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
 
         attributes.put("reviewId", getReviewId());
         attributes.put("reviewerId", getReviewerId());
+        attributes.put("imgUrl", getImgUrl());
         attributes.put("name", getName());
         attributes.put("text", getText());
+        attributes.put("date", getDate());
 
         return attributes;
     }
@@ -189,6 +198,12 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
             setReviewerId(reviewerId);
         }
 
+        String imgUrl = (String) attributes.get("imgUrl");
+
+        if (imgUrl != null) {
+            setImgUrl(imgUrl);
+        }
+
         String name = (String) attributes.get("name");
 
         if (name != null) {
@@ -199,6 +214,12 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
 
         if (text != null) {
             setText(text);
+        }
+
+        Date date = (Date) attributes.get("date");
+
+        if (date != null) {
+            setDate(date);
         }
     }
 
@@ -222,6 +243,21 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
     @Override
     public void setReviewerId(long reviewerId) {
         _reviewerId = reviewerId;
+    }
+
+    @JSON
+    @Override
+    public String getImgUrl() {
+        if (_imgUrl == null) {
+            return StringPool.BLANK;
+        } else {
+            return _imgUrl;
+        }
+    }
+
+    @Override
+    public void setImgUrl(String imgUrl) {
+        _imgUrl = imgUrl;
     }
 
     @JSON
@@ -254,6 +290,17 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
         _text = text;
     }
 
+    @JSON
+    @Override
+    public Date getDate() {
+        return _date;
+    }
+
+    @Override
+    public void setDate(Date date) {
+        _date = date;
+    }
+
     @Override
     public ExpandoBridge getExpandoBridge() {
         return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -283,8 +330,10 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
 
         reviewImpl.setReviewId(getReviewId());
         reviewImpl.setReviewerId(getReviewerId());
+        reviewImpl.setImgUrl(getImgUrl());
         reviewImpl.setName(getName());
         reviewImpl.setText(getText());
+        reviewImpl.setDate(getDate());
 
         reviewImpl.resetOriginalValues();
 
@@ -342,6 +391,14 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
 
         reviewCacheModel.reviewerId = getReviewerId();
 
+        reviewCacheModel.imgUrl = getImgUrl();
+
+        String imgUrl = reviewCacheModel.imgUrl;
+
+        if ((imgUrl != null) && (imgUrl.length() == 0)) {
+            reviewCacheModel.imgUrl = null;
+        }
+
         reviewCacheModel.name = getName();
 
         String name = reviewCacheModel.name;
@@ -358,21 +415,33 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
             reviewCacheModel.text = null;
         }
 
+        Date date = getDate();
+
+        if (date != null) {
+            reviewCacheModel.date = date.getTime();
+        } else {
+            reviewCacheModel.date = Long.MIN_VALUE;
+        }
+
         return reviewCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(9);
+        StringBundler sb = new StringBundler(13);
 
         sb.append("{reviewId=");
         sb.append(getReviewId());
         sb.append(", reviewerId=");
         sb.append(getReviewerId());
+        sb.append(", imgUrl=");
+        sb.append(getImgUrl());
         sb.append(", name=");
         sb.append(getName());
         sb.append(", text=");
         sb.append(getText());
+        sb.append(", date=");
+        sb.append(getDate());
         sb.append("}");
 
         return sb.toString();
@@ -380,7 +449,7 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(16);
+        StringBundler sb = new StringBundler(22);
 
         sb.append("<model><model-name>");
         sb.append("com.mir.news.model.Review");
@@ -395,12 +464,20 @@ public class ReviewModelImpl extends BaseModelImpl<Review>
         sb.append(getReviewerId());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>imgUrl</column-name><column-value><![CDATA[");
+        sb.append(getImgUrl());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>name</column-name><column-value><![CDATA[");
         sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>text</column-name><column-value><![CDATA[");
         sb.append(getText());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>date</column-name><column-value><![CDATA[");
+        sb.append(getDate());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

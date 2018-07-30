@@ -3,6 +3,7 @@ create table article (
 	authorId LONG,
 	name VARCHAR(75) null,
 	text_ VARCHAR(75) null,
+	date_ DATE null,
 	status VARCHAR(75) null
 );
 
@@ -15,6 +16,8 @@ create table dailymail_Articles_Reviews (
 create table review (
 	reviewId LONG not null primary key,
 	reviewerId LONG,
+	imgUrl VARCHAR(75) null,
 	name VARCHAR(75) null,
-	text_ VARCHAR(75) null
+	text_ VARCHAR(75) null,
+	date_ DATE null
 );

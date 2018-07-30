@@ -17,9 +17,6 @@ public interface Article extends ArticleModel, PersistedModel {
      *
      * Never modify this interface directly. Add methods to {@link com.mir.news.model.impl.ArticleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
-<<<<<<< HEAD
     public java.util.List<com.mir.news.model.Review> getReviews()
         throws com.liferay.portal.kernel.exception.SystemException;
-=======
->>>>>>> 816e3130999f956bdec64fcf78b511dbf024c3e4
 }

@@ -3,6 +3,7 @@ package com.mir.news.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,8 +16,10 @@ import java.util.List;
 public class ReviewSoap implements Serializable {
     private long _reviewId;
     private long _reviewerId;
+    private String _imgUrl;
     private String _name;
     private String _text;
+    private Date _date;
 
     public ReviewSoap() {
     }
@@ -26,8 +29,10 @@ public class ReviewSoap implements Serializable {
 
         soapModel.setReviewId(model.getReviewId());
         soapModel.setReviewerId(model.getReviewerId());
+        soapModel.setImgUrl(model.getImgUrl());
         soapModel.setName(model.getName());
         soapModel.setText(model.getText());
+        soapModel.setDate(model.getDate());
 
         return soapModel;
     }
@@ -92,6 +97,14 @@ public class ReviewSoap implements Serializable {
         _reviewerId = reviewerId;
     }
 
+    public String getImgUrl() {
+        return _imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        _imgUrl = imgUrl;
+    }
+
     public String getName() {
         return _name;
     }
@@ -106,5 +119,13 @@ public class ReviewSoap implements Serializable {
 
     public void setText(String text) {
         _text = text;
+    }
+
+    public Date getDate() {
+        return _date;
+    }
+
+    public void setDate(Date date) {
+        _date = date;
     }
 }

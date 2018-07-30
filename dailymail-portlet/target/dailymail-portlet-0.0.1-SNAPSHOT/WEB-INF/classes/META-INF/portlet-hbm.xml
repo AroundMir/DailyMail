@@ -11,6 +11,7 @@
 		<property name="authorId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="text" type="com.liferay.portal.dao.orm.hibernate.StringType" column="text_" />
+		<property name="date" type="org.hibernate.type.TimestampType" column="date_" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.mir.news.model.impl.ReviewImpl" table="review">
@@ -18,7 +19,9 @@
 			<generator class="assigned" />
 		</id>
 		<property name="reviewerId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="imgUrl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="text" type="com.liferay.portal.dao.orm.hibernate.StringType" column="text_" />
+		<property name="date" type="org.hibernate.type.TimestampType" column="date_" />
 	</class>
 </hibernate-mapping>

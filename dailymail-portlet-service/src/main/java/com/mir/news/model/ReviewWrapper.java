@@ -3,6 +3,7 @@ package com.mir.news.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,8 +39,10 @@ public class ReviewWrapper implements Review, ModelWrapper<Review> {
 
         attributes.put("reviewId", getReviewId());
         attributes.put("reviewerId", getReviewerId());
+        attributes.put("imgUrl", getImgUrl());
         attributes.put("name", getName());
         attributes.put("text", getText());
+        attributes.put("date", getDate());
 
         return attributes;
     }
@@ -58,6 +61,12 @@ public class ReviewWrapper implements Review, ModelWrapper<Review> {
             setReviewerId(reviewerId);
         }
 
+        String imgUrl = (String) attributes.get("imgUrl");
+
+        if (imgUrl != null) {
+            setImgUrl(imgUrl);
+        }
+
         String name = (String) attributes.get("name");
 
         if (name != null) {
@@ -68,6 +77,12 @@ public class ReviewWrapper implements Review, ModelWrapper<Review> {
 
         if (text != null) {
             setText(text);
+        }
+
+        Date date = (Date) attributes.get("date");
+
+        if (date != null) {
+            setDate(date);
         }
     }
 
@@ -132,6 +147,26 @@ public class ReviewWrapper implements Review, ModelWrapper<Review> {
     }
 
     /**
+    * Returns the img url of this review.
+    *
+    * @return the img url of this review
+    */
+    @Override
+    public java.lang.String getImgUrl() {
+        return _review.getImgUrl();
+    }
+
+    /**
+    * Sets the img url of this review.
+    *
+    * @param imgUrl the img url of this review
+    */
+    @Override
+    public void setImgUrl(java.lang.String imgUrl) {
+        _review.setImgUrl(imgUrl);
+    }
+
+    /**
     * Returns the name of this review.
     *
     * @return the name of this review
@@ -169,6 +204,26 @@ public class ReviewWrapper implements Review, ModelWrapper<Review> {
     @Override
     public void setText(java.lang.String text) {
         _review.setText(text);
+    }
+
+    /**
+    * Returns the date of this review.
+    *
+    * @return the date of this review
+    */
+    @Override
+    public java.util.Date getDate() {
+        return _review.getDate();
+    }
+
+    /**
+    * Sets the date of this review.
+    *
+    * @param date the date of this review
+    */
+    @Override
+    public void setDate(java.util.Date date) {
+        _review.setDate(date);
     }
 
     @Override

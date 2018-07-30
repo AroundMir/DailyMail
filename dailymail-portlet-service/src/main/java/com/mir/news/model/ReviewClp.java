@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +22,10 @@ import java.util.Map;
 public class ReviewClp extends BaseModelImpl<Review> implements Review {
     private long _reviewId;
     private long _reviewerId;
+    private String _imgUrl;
     private String _name;
     private String _text;
+    private Date _date;
     private BaseModel<?> _reviewRemoteModel;
     private Class<?> _clpSerializerClass = com.mir.news.service.ClpSerializer.class;
 
@@ -65,8 +68,10 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
 
         attributes.put("reviewId", getReviewId());
         attributes.put("reviewerId", getReviewerId());
+        attributes.put("imgUrl", getImgUrl());
         attributes.put("name", getName());
         attributes.put("text", getText());
+        attributes.put("date", getDate());
 
         return attributes;
     }
@@ -85,6 +90,12 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
             setReviewerId(reviewerId);
         }
 
+        String imgUrl = (String) attributes.get("imgUrl");
+
+        if (imgUrl != null) {
+            setImgUrl(imgUrl);
+        }
+
         String name = (String) attributes.get("name");
 
         if (name != null) {
@@ -95,6 +106,12 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
 
         if (text != null) {
             setText(text);
+        }
+
+        Date date = (Date) attributes.get("date");
+
+        if (date != null) {
+            setDate(date);
         }
     }
 
@@ -143,6 +160,28 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
     }
 
     @Override
+    public String getImgUrl() {
+        return _imgUrl;
+    }
+
+    @Override
+    public void setImgUrl(String imgUrl) {
+        _imgUrl = imgUrl;
+
+        if (_reviewRemoteModel != null) {
+            try {
+                Class<?> clazz = _reviewRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setImgUrl", String.class);
+
+                method.invoke(_reviewRemoteModel, imgUrl);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public String getName() {
         return _name;
     }
@@ -180,6 +219,28 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
                 Method method = clazz.getMethod("setText", String.class);
 
                 method.invoke(_reviewRemoteModel, text);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public Date getDate() {
+        return _date;
+    }
+
+    @Override
+    public void setDate(Date date) {
+        _date = date;
+
+        if (_reviewRemoteModel != null) {
+            try {
+                Class<?> clazz = _reviewRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setDate", Date.class);
+
+                method.invoke(_reviewRemoteModel, date);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -255,8 +316,10 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
 
         clone.setReviewId(getReviewId());
         clone.setReviewerId(getReviewerId());
+        clone.setImgUrl(getImgUrl());
         clone.setName(getName());
         clone.setText(getText());
+        clone.setDate(getDate());
 
         return clone;
     }
@@ -306,16 +369,20 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(9);
+        StringBundler sb = new StringBundler(13);
 
         sb.append("{reviewId=");
         sb.append(getReviewId());
         sb.append(", reviewerId=");
         sb.append(getReviewerId());
+        sb.append(", imgUrl=");
+        sb.append(getImgUrl());
         sb.append(", name=");
         sb.append(getName());
         sb.append(", text=");
         sb.append(getText());
+        sb.append(", date=");
+        sb.append(getDate());
         sb.append("}");
 
         return sb.toString();
@@ -323,7 +390,7 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(16);
+        StringBundler sb = new StringBundler(22);
 
         sb.append("<model><model-name>");
         sb.append("com.mir.news.model.Review");
@@ -338,12 +405,20 @@ public class ReviewClp extends BaseModelImpl<Review> implements Review {
         sb.append(getReviewerId());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>imgUrl</column-name><column-value><![CDATA[");
+        sb.append(getImgUrl());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>name</column-name><column-value><![CDATA[");
         sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>text</column-name><column-value><![CDATA[");
         sb.append(getText());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>date</column-name><column-value><![CDATA[");
+        sb.append(getDate());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

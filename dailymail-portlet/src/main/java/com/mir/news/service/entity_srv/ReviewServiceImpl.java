@@ -1,5 +1,6 @@
 package com.mir.news.service.entity_srv;
 
+import java.util.Date;
 import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -36,17 +37,23 @@ public class ReviewServiceImpl implements ReviewSrv {
     String reviewText = actionRequest.getParameter("text");
     String articleId = actionRequest.getParameter("articleId");
 
-    long reiviewId = CounterLocalServiceUtil.increment(Review.class.getName());
-    Review review = ReviewLocalServiceUtil.createReview(reiviewId);
-    review.setName(reviewName);
-    review.setText(reviewText);
-
     ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
     long userID = themeDisp.getUserId();
-
+    String userImgUrl = themeDisp.getUser().getPortraitURL(themeDisp);
+    Date date = new Date();
+    
+    long reiviewId = CounterLocalServiceUtil.increment(Review.class.getName());
+    Review review = ReviewLocalServiceUtil.createReview(reiviewId);
+    
+    review.setName(reviewName);
+    review.setText(reviewText);
+    review.setReviewerId(userID);
+    review.setImgUrl(userImgUrl);
+    review.setDate(date);
+    review.getDate().toString();
+    
     Article article = ArticleLocalServiceUtil.getArticle(Long.parseLong(articleId));
 
-    review.setReviewerId(userID);
     review = ReviewLocalServiceUtil.addReview(review);
     ReviewLocalServiceUtil.addArticleReview(article.getArticleId(), review.getReviewId());
 
@@ -56,7 +63,6 @@ public class ReviewServiceImpl implements ReviewSrv {
   @Override
   public Review delete(ActionRequest actionRequest) throws NumberFormatException, PortalException,
       SystemException {
-
     String reviewId = actionRequest.getParameter("reviewId");
     // System.out.println(reviewId);
     if (reviewId != null) {

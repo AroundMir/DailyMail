@@ -10,15 +10,15 @@
 <link rel="stylesheet" type="text/css"
 	href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
 
-<portlet:actionURL name="checkEditingArticles"
+<portlet:actionURL name="setEditingArticles"
 	var="getEditingArticlesURL">
 </portlet:actionURL>
 
-<portlet:actionURL name="checkPublishedArticles"
+<portlet:actionURL name="setPublishedArticles"
 	var="getPublishedArticlesURL">
 </portlet:actionURL>
 
-<portlet:actionURL name="checkConfirmationArticles"
+<portlet:actionURL name="setConfirmationArticles"
 	var="getConfirmationArticlesURL">
 </portlet:actionURL>
 
@@ -73,10 +73,10 @@
 <table id="acticleTable" class="acticleTable">
 	<thead>
 		<tr>
-			<th>Article Title</th>
-			<th>Article Text</th>
-			<th>Status</th>
-			<th>Actions</th>
+			<th><liferay-ui:message key="articleTitle" /></th>
+			<th><liferay-ui:message key="articleText" /></th>
+			<th><liferay-ui:message key="articleStatus" /></th>
+			<th><liferay-ui:message key="actions" /></th>
 		</tr>
 	</thead>
 	<tbody>

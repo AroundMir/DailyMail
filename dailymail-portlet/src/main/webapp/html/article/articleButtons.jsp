@@ -1,6 +1,5 @@
 <%@ include file='/html/init.jsp'%>
 
-
 <portlet:actionURL var="publishArticleURL"
 	name="setArticlePublishStatus">
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
@@ -36,7 +35,7 @@
 
 
 <c:if test="${currentRole.equalsIgnoreCase(AUTHOR)}">
-	<c:if test="${article.getStatus().equalsIgnoreCase('EDITING')}">
+	<c:if test="${article.getStatus().equalsIgnoreCase(EDITING)}">
 		<a href="${deleteArticleURL}">
 			<button type="submit">
 				<liferay-ui:message key="deleteArticle" />
@@ -53,7 +52,7 @@
 			</button>
 		</a>
 	</c:if>
-	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
+	<c:if test="${article.getStatus().equalsIgnoreCase(PUBLISHED)}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">
 				<liferay-ui:message key="checkReviews" />
@@ -63,7 +62,7 @@
 </c:if>
 
 <c:if test="${currentRole.equalsIgnoreCase(EDITOR)}">
-	<c:if test="${article.getStatus().equalsIgnoreCase('CONFIRMATION')}">
+	<c:if test="${article.getStatus().equalsIgnoreCase(CONFIRMATION)}">
 		<a href="${deleteArticleURL}">
 			<button type="submit">
 				<liferay-ui:message key="deleteArticle" />
@@ -80,7 +79,7 @@
 			</button>
 		</a>
 	</c:if>
-	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
+	<c:if test="${article.getStatus().equalsIgnoreCase(PUBLISHED)}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">
 				<liferay-ui:message key="checkReviews" />
