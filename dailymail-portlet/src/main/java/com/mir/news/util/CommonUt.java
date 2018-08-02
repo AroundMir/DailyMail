@@ -2,6 +2,7 @@ package com.mir.news.util;
 
 import java.util.List;
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -52,7 +53,18 @@ public class CommonUt {
         renderRequest.setAttribute("reviews", reviews);
         return inputPage;
       }
-      return inputPage;
+      if (Views.ARTICLE_REJECT_VIEW.equalsIgnoreCase(inputPage)) {
+        return inputPage;
+      }
+      if (Views.ARTICLE_EDIT.equalsIgnoreCase(inputPage)) {
+        return inputPage;
+      }
+      if (Views.ARTICLE_ADD.equalsIgnoreCase(inputPage)) {
+        return inputPage;
+      }
+      if (Views.REVIEW_ADD.equalsIgnoreCase(inputPage)) {
+        return inputPage;
+      }
     }
     inputPage = Views.MAIN_VIEW;
     return inputPage;
@@ -120,16 +132,9 @@ public class CommonUt {
     return Roles.NONE;
   }
 
-  public long getCurrentUserId(RenderRequest renderRequest) {
+  public long getCurrentUserId(PortletRequest portletRequest) {
 
-    ThemeDisplay themeDisp = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-    long userID = themeDisp.getUserId();
-    return userID;
-  }
-
-  public long getCurrentUserId(ActionRequest actionRequest) {
-
-    ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+    ThemeDisplay themeDisp = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
     long userID = themeDisp.getUserId();
     return userID;
   }

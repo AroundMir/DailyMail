@@ -3,6 +3,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
+	
 </script>
 
 <script type="text/javascript"
@@ -10,8 +11,7 @@
 <link rel="stylesheet" type="text/css"
 	href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
 
-<portlet:actionURL name="setEditingArticles"
-	var="getEditingArticlesURL">
+<portlet:actionURL name="setEditingArticles" var="getEditingArticlesURL">
 </portlet:actionURL>
 
 <portlet:actionURL name="setPublishedArticles"
@@ -76,6 +76,9 @@
 			<th><liferay-ui:message key="articleTitle" /></th>
 			<th><liferay-ui:message key="articleText" /></th>
 			<th><liferay-ui:message key="articleStatus" /></th>
+			<c:if test="${commentFlug.equalsIgnoreCase('true')}">
+				<th><liferay-ui:message key="editorComment" /></th>
+			</c:if>
 			<th><liferay-ui:message key="actions" /></th>
 		</tr>
 	</thead>
@@ -85,6 +88,9 @@
 				<td>${article.name}</td>
 				<td>${article.text}</td>
 				<td>${article.status}</td>
+				<c:if test="${article.getStatus().equalsIgnoreCase('EDITING')}">
+					<td>${article.editorComment}</td>
+				</c:if>
 				<td><%@ include file='/html/article/articleButtons.jsp'%></td>
 			</tr>
 		</c:forEach>

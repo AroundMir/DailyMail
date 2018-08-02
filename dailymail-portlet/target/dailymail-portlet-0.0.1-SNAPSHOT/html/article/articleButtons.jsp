@@ -35,7 +35,7 @@
 
 
 <c:if test="${currentRole.equalsIgnoreCase(AUTHOR)}">
-	<c:if test="${article.getStatus().equalsIgnoreCase(EDITING)}">
+	<c:if test="${article.getStatus().equalsIgnoreCase('EDITING')}">
 		<a href="${deleteArticleURL}">
 			<button type="submit">
 				<liferay-ui:message key="deleteArticle" />
@@ -52,7 +52,9 @@
 			</button>
 		</a>
 	</c:if>
-	<c:if test="${article.getStatus().equalsIgnoreCase(PUBLISHED)}">
+	
+	<!-- P'U`B'L"ISHED -->
+	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">
 				<liferay-ui:message key="checkReviews" />
@@ -62,7 +64,7 @@
 </c:if>
 
 <c:if test="${currentRole.equalsIgnoreCase(EDITOR)}">
-	<c:if test="${article.getStatus().equalsIgnoreCase(CONFIRMATION)}">
+	<c:if test="${article.getStatus().equalsIgnoreCase('CONFIRMATION')}">
 		<a href="${deleteArticleURL}">
 			<button type="submit">
 				<liferay-ui:message key="deleteArticle" />
@@ -79,7 +81,7 @@
 			</button>
 		</a>
 	</c:if>
-	<c:if test="${article.getStatus().equalsIgnoreCase(PUBLISHED)}">
+	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">
 				<liferay-ui:message key="checkReviews" />
@@ -93,7 +95,7 @@
 	</c:if>
 </c:if>
 
-<c:if test="${currentRole.equalsIgnoreCase(REVIEWER)}">
+<c:if test="${currentRole.equalsIgnoreCase('REVIEWER')}">
 	<a href="${writeReviewURL}">
 		<button type="submit">
 			<liferay-ui:message key="writeReview" />

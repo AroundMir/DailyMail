@@ -27,10 +27,11 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
     public String text;
     public long date;
     public String status;
+    public String editorComment;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(13);
+        StringBundler sb = new StringBundler(15);
 
         sb.append("{articleId=");
         sb.append(articleId);
@@ -44,6 +45,8 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
         sb.append(date);
         sb.append(", status=");
         sb.append(status);
+        sb.append(", editorComment=");
+        sb.append(editorComment);
         sb.append("}");
 
         return sb.toString();
@@ -80,6 +83,12 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
             articleImpl.setStatus(status);
         }
 
+        if (editorComment == null) {
+            articleImpl.setEditorComment(StringPool.BLANK);
+        } else {
+            articleImpl.setEditorComment(editorComment);
+        }
+
         articleImpl.resetOriginalValues();
 
         return articleImpl;
@@ -93,6 +102,7 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
         text = objectInput.readUTF();
         date = objectInput.readLong();
         status = objectInput.readUTF();
+        editorComment = objectInput.readUTF();
     }
 
     @Override
@@ -119,6 +129,12 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(status);
+        }
+
+        if (editorComment == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(editorComment);
         }
     }
 }

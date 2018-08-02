@@ -132,6 +132,21 @@ public interface ArticleModel extends BaseModel<Article> {
      */
     public void setStatus(String status);
 
+    /**
+     * Returns the editor comment of this article.
+     *
+     * @return the editor comment of this article
+     */
+    @AutoEscape
+    public String getEditorComment();
+
+    /**
+     * Sets the editor comment of this article.
+     *
+     * @param editorComment the editor comment of this article
+     */
+    public void setEditorComment(String editorComment);
+
     @Override
     public boolean isNew();
 

@@ -43,6 +43,7 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
         attributes.put("text", getText());
         attributes.put("date", getDate());
         attributes.put("status", getStatus());
+        attributes.put("editorComment", getEditorComment());
 
         return attributes;
     }
@@ -83,6 +84,12 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
 
         if (status != null) {
             setStatus(status);
+        }
+
+        String editorComment = (String) attributes.get("editorComment");
+
+        if (editorComment != null) {
+            setEditorComment(editorComment);
         }
     }
 
@@ -224,6 +231,26 @@ public class ArticleWrapper implements Article, ModelWrapper<Article> {
     @Override
     public void setStatus(java.lang.String status) {
         _article.setStatus(status);
+    }
+
+    /**
+    * Returns the editor comment of this article.
+    *
+    * @return the editor comment of this article
+    */
+    @Override
+    public java.lang.String getEditorComment() {
+        return _article.getEditorComment();
+    }
+
+    /**
+    * Sets the editor comment of this article.
+    *
+    * @param editorComment the editor comment of this article
+    */
+    @Override
+    public void setEditorComment(java.lang.String editorComment) {
+        _article.setEditorComment(editorComment);
     }
 
     @Override

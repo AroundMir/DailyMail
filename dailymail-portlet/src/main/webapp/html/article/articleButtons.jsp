@@ -5,12 +5,13 @@
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
 </portlet:actionURL>
 
-<portlet:actionURL var="rejectArticleURL" name="setArticleEditStatus">
+<portlet:renderURL var="rejectArticleURL">
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
-</portlet:actionURL>
+	<portlet:param name="pageChecker"
+		value="/html/article/articleReject.jsp" />
+</portlet:renderURL>
 
-<portlet:actionURL var="sendArticleOnConfirmationURL"
-	name="setArticleConfirmationStatus">
+<portlet:actionURL var="sendArticleOnConfirmationURL" name="setArticleConfirmationStatus">
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
 </portlet:actionURL>
 
@@ -52,6 +53,8 @@
 			</button>
 		</a>
 	</c:if>
+
+	<!-- P'U`B'L"ISHED -->
 	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">

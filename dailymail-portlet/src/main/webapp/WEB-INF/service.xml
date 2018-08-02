@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 
 <service-builder package-path="com.mir.news">
@@ -9,6 +10,7 @@
 		<column name="text" type="String" />
 		<column name="date" type="Date"></column>
 		<column name="status" type="String" />
+		<column name="editorComment" type="String"></column>
 		<column name="reviews" type="Collection" entity="Review" mapping-table="Articles_Reviews"/>
 	</entity>
 	<entity name="Review" table='review' local-service="true" remote-service="true" cache-enabled="false">

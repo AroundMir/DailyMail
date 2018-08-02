@@ -20,6 +20,7 @@ public class ArticleSoap implements Serializable {
     private String _text;
     private Date _date;
     private String _status;
+    private String _editorComment;
 
     public ArticleSoap() {
     }
@@ -33,6 +34,7 @@ public class ArticleSoap implements Serializable {
         soapModel.setText(model.getText());
         soapModel.setDate(model.getDate());
         soapModel.setStatus(model.getStatus());
+        soapModel.setEditorComment(model.getEditorComment());
 
         return soapModel;
     }
@@ -127,5 +129,13 @@ public class ArticleSoap implements Serializable {
 
     public void setStatus(String status) {
         _status = status;
+    }
+
+    public String getEditorComment() {
+        return _editorComment;
+    }
+
+    public void setEditorComment(String editorComment) {
+        _editorComment = editorComment;
     }
 }

@@ -8,6 +8,7 @@
 		<field name="text" type="String" />
 		<field name="date" type="Date" />
 		<field name="status" type="String" />
+		<field name="editorComment" type="String" />
 	</model>
 	<model name="com.mir.news.model.Review">
 		<field name="reviewId" type="long" />

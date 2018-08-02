@@ -55,9 +55,10 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
             { "name", Types.VARCHAR },
             { "text_", Types.VARCHAR },
             { "date_", Types.TIMESTAMP },
-            { "status", Types.VARCHAR }
+            { "status", Types.VARCHAR },
+            { "editorComment", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table article (articleId LONG not null primary key,authorId LONG,name VARCHAR(75) null,text_ VARCHAR(75) null,date_ DATE null,status VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table article (articleId LONG not null primary key,authorId LONG,name VARCHAR(75) null,text_ VARCHAR(75) null,date_ DATE null,status VARCHAR(75) null,editorComment VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table article";
     public static final String ORDER_BY_JPQL = " ORDER BY article.articleId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY article.articleId ASC";
@@ -94,6 +95,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
     private String _text;
     private Date _date;
     private String _status;
+    private String _editorComment;
     private Article _escapedModel;
 
     public ArticleModelImpl() {
@@ -118,6 +120,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         model.setText(soapModel.getText());
         model.setDate(soapModel.getDate());
         model.setStatus(soapModel.getStatus());
+        model.setEditorComment(soapModel.getEditorComment());
 
         return model;
     }
@@ -182,6 +185,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         attributes.put("text", getText());
         attributes.put("date", getDate());
         attributes.put("status", getStatus());
+        attributes.put("editorComment", getEditorComment());
 
         return attributes;
     }
@@ -222,6 +226,12 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
 
         if (status != null) {
             setStatus(status);
+        }
+
+        String editorComment = (String) attributes.get("editorComment");
+
+        if (editorComment != null) {
+            setEditorComment(editorComment);
         }
     }
 
@@ -303,6 +313,21 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         _status = status;
     }
 
+    @JSON
+    @Override
+    public String getEditorComment() {
+        if (_editorComment == null) {
+            return StringPool.BLANK;
+        } else {
+            return _editorComment;
+        }
+    }
+
+    @Override
+    public void setEditorComment(String editorComment) {
+        _editorComment = editorComment;
+    }
+
     @Override
     public ExpandoBridge getExpandoBridge() {
         return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -336,6 +361,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         articleImpl.setText(getText());
         articleImpl.setDate(getDate());
         articleImpl.setStatus(getStatus());
+        articleImpl.setEditorComment(getEditorComment());
 
         articleImpl.resetOriginalValues();
 
@@ -425,12 +451,20 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
             articleCacheModel.status = null;
         }
 
+        articleCacheModel.editorComment = getEditorComment();
+
+        String editorComment = articleCacheModel.editorComment;
+
+        if ((editorComment != null) && (editorComment.length() == 0)) {
+            articleCacheModel.editorComment = null;
+        }
+
         return articleCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(13);
+        StringBundler sb = new StringBundler(15);
 
         sb.append("{articleId=");
         sb.append(getArticleId());
@@ -444,6 +478,8 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         sb.append(getDate());
         sb.append(", status=");
         sb.append(getStatus());
+        sb.append(", editorComment=");
+        sb.append(getEditorComment());
         sb.append("}");
 
         return sb.toString();
@@ -451,7 +487,7 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(22);
+        StringBundler sb = new StringBundler(25);
 
         sb.append("<model><model-name>");
         sb.append("com.mir.news.model.Article");
@@ -480,6 +516,10 @@ public class ArticleModelImpl extends BaseModelImpl<Article>
         sb.append(
             "<column><column-name>status</column-name><column-value><![CDATA[");
         sb.append(getStatus());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>editorComment</column-name><column-value><![CDATA[");
+        sb.append(getEditorComment());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

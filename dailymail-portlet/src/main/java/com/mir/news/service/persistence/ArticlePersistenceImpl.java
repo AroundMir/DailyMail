@@ -342,6 +342,7 @@ public class ArticlePersistenceImpl extends BasePersistenceImpl<Article>
         articleImpl.setText(article.getText());
         articleImpl.setDate(article.getDate());
         articleImpl.setStatus(article.getStatus());
+        articleImpl.setEditorComment(article.getEditorComment());
 
         return articleImpl;
     }

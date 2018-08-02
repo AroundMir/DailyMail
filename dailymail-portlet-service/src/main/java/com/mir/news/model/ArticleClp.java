@@ -26,6 +26,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
     private String _text;
     private Date _date;
     private String _status;
+    private String _editorComment;
     private BaseModel<?> _articleRemoteModel;
     private Class<?> _clpSerializerClass = com.mir.news.service.ClpSerializer.class;
 
@@ -72,6 +73,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         attributes.put("text", getText());
         attributes.put("date", getDate());
         attributes.put("status", getStatus());
+        attributes.put("editorComment", getEditorComment());
 
         return attributes;
     }
@@ -112,6 +114,12 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
 
         if (status != null) {
             setStatus(status);
+        }
+
+        String editorComment = (String) attributes.get("editorComment");
+
+        if (editorComment != null) {
+            setEditorComment(editorComment);
         }
     }
 
@@ -248,6 +256,28 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
     }
 
     @Override
+    public String getEditorComment() {
+        return _editorComment;
+    }
+
+    @Override
+    public void setEditorComment(String editorComment) {
+        _editorComment = editorComment;
+
+        if (_articleRemoteModel != null) {
+            try {
+                Class<?> clazz = _articleRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setEditorComment", String.class);
+
+                method.invoke(_articleRemoteModel, editorComment);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public java.util.List<com.mir.news.model.Review> getReviews() {
         try {
             String methodName = "getReviews";
@@ -338,6 +368,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         clone.setText(getText());
         clone.setDate(getDate());
         clone.setStatus(getStatus());
+        clone.setEditorComment(getEditorComment());
 
         return clone;
     }
@@ -387,7 +418,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(13);
+        StringBundler sb = new StringBundler(15);
 
         sb.append("{articleId=");
         sb.append(getArticleId());
@@ -401,6 +432,8 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         sb.append(getDate());
         sb.append(", status=");
         sb.append(getStatus());
+        sb.append(", editorComment=");
+        sb.append(getEditorComment());
         sb.append("}");
 
         return sb.toString();
@@ -408,7 +441,7 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(22);
+        StringBundler sb = new StringBundler(25);
 
         sb.append("<model><model-name>");
         sb.append("com.mir.news.model.Article");
@@ -437,6 +470,10 @@ public class ArticleClp extends BaseModelImpl<Article> implements Article {
         sb.append(
             "<column><column-name>status</column-name><column-value><![CDATA[");
         sb.append(getStatus());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>editorComment</column-name><column-value><![CDATA[");
+        sb.append(getEditorComment());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

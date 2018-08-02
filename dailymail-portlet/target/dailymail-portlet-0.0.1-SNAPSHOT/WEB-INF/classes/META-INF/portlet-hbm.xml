@@ -13,6 +13,7 @@
 		<property name="text" type="com.liferay.portal.dao.orm.hibernate.StringType" column="text_" />
 		<property name="date" type="org.hibernate.type.TimestampType" column="date_" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="editorComment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.mir.news.model.impl.ReviewImpl" table="review">
 		<id name="reviewId" type="long">

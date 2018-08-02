@@ -4,7 +4,8 @@ create table article (
 	name VARCHAR(75) null,
 	text_ VARCHAR(75) null,
 	date_ DATE null,
-	status VARCHAR(75) null
+	status VARCHAR(75) null,
+	editorComment VARCHAR(75) null
 );
 
 create table dailymail_Articles_Reviews (
