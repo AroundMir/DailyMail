@@ -7,6 +7,7 @@ import javax.portlet.RenderRequest;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.mir.news.model.Article;
@@ -29,58 +30,71 @@ public class ReviewServiceImpl implements ReviewSrv {
     return reviewSrv;
   }
 
+  /**
+   * Create new Review
+   */
+
   @Override
-  public Review create(ActionRequest actionRequest) throws SystemException, NumberFormatException,
-      PortalException {
+  public Review createReview(ActionRequest actionRequest) throws SystemException,
+      NumberFormatException, PortalException {
 
     String reviewName = actionRequest.getParameter("name");
     String reviewText = actionRequest.getParameter("text");
-    String articleId = actionRequest.getParameter("articleId");
+    long articleId = ParamUtil.getLong(actionRequest, "articleId", 0);
+    Review review = null;
+    if (articleId != 0) {
+      
+      ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+      long userID = themeDisp.getUserId();
+      
+      String userImgUrl = themeDisp.getUser().getPortraitURL(themeDisp);
+      Date date = new Date();
+      long reiviewId = CounterLocalServiceUtil.increment(Review.class.getName());
+      review = ReviewLocalServiceUtil.createReview(reiviewId);
 
-    ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-    long userID = themeDisp.getUserId();
-    String userImgUrl = themeDisp.getUser().getPortraitURL(themeDisp);
-    Date date = new Date();
-    
-    long reiviewId = CounterLocalServiceUtil.increment(Review.class.getName());
-    Review review = ReviewLocalServiceUtil.createReview(reiviewId);
-    
-    review.setName(reviewName);
-    review.setText(reviewText);
-    review.setReviewerId(userID);
-    review.setImgUrl(userImgUrl);
-    review.setDate(date);
-    review.getDate().toString();
-    
-    Article article = ArticleLocalServiceUtil.getArticle(Long.parseLong(articleId));
+      review.setName(reviewName);
+      review.setText(reviewText);
+      review.setReviewerId(userID);
+      review.setImgUrl(userImgUrl);
+      review.setDate(date);
+      review.getDate().toString();
 
-    review = ReviewLocalServiceUtil.addReview(review);
-    ReviewLocalServiceUtil.addArticleReview(article.getArticleId(), review.getReviewId());
-
+      Article article = ArticleLocalServiceUtil.getArticle(articleId);
+      review = ReviewLocalServiceUtil.addReview(review);
+      ReviewLocalServiceUtil.addArticleReview(article.getArticleId(), review.getReviewId());
+    }
     return review;
   }
 
+  /**
+   * Delete review by id
+   */
+  
   @Override
-  public Review delete(ActionRequest actionRequest) throws NumberFormatException, PortalException,
-      SystemException {
-    String reviewId = actionRequest.getParameter("reviewId");
-    // System.out.println(reviewId);
-    if (reviewId != null) {
-      Review review = ReviewLocalServiceUtil.deleteReview(Long.parseLong(reviewId));
+  public Review deleteReview(ActionRequest actionRequest) throws NumberFormatException,
+      PortalException, SystemException {
+
+    long reviewId = ParamUtil.getLong(actionRequest, "reviewId", 0);
+    if (reviewId != 0) {
+      Review review = ReviewLocalServiceUtil.deleteReview(reviewId);
       return review;
     }
     return null;
   }
+  
+  /**
+   * Update review
+   */
 
   @Override
-  public Review update(ActionRequest actionRequest) throws SystemException, NumberFormatException,
-      PortalException {
+  public Review updateReview(ActionRequest actionRequest) throws SystemException,
+      NumberFormatException, PortalException {
 
     String reviewName = actionRequest.getParameter("name");
     String reviewText = actionRequest.getParameter("text");
-    String reiviewId = actionRequest.getParameter("reiviewId");
-    if (reiviewId != null) {
-      Review review = ReviewLocalServiceUtil.getReview(Long.parseLong(reiviewId));
+    long reviewId = ParamUtil.getLong(actionRequest, "reviewId", 0);
+    if (reviewId != 0) {
+      Review review = ReviewLocalServiceUtil.getReview(reviewId);
       review.setName(reviewName);
       review.setText(reviewText);
       review = ReviewLocalServiceUtil.addReview(review);
@@ -88,29 +102,28 @@ public class ReviewServiceImpl implements ReviewSrv {
     }
     return null;
   }
+  
+  /**
+   * Get review by Id
+   */
 
   @Override
-  public Review find(RenderRequest renderRequest) throws NumberFormatException, PortalException,
-      SystemException {
+  public Review findReview(RenderRequest renderRequest) throws NumberFormatException,
+      PortalException, SystemException {
 
-    String reiviewId = renderRequest.getParameter("reiviewId");
-    if (reiviewId != null) {
-      Review review = ReviewLocalServiceUtil.getReview(Long.parseLong(reiviewId));
+    long reviewId = ParamUtil.getLong(renderRequest, "reviewId", 0);
+    if (reviewId != 0) {
+      Review review = ReviewLocalServiceUtil.getReview(reviewId);
       return review;
     }
     return null;
   }
 
   @Override
-  public List<Review> findAll() throws SystemException {
+  public List<Review> findAllReviews() throws SystemException {
 
     long reviewCount = ReviewLocalServiceUtil.getReviewsCount();
     List<Review> reviews = ReviewLocalServiceUtil.getReviews(0, (int) reviewCount);
     return reviews;
-  }
-
-  @Override
-  public Review find(ActionRequest request) throws SystemException {
-    return null;
   }
 }

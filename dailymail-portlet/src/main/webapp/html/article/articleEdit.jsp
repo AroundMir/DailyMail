@@ -1,10 +1,11 @@
 <%@ include file='/html/init.jsp'%>
 
 <portlet:actionURL name="updateArticle" var="editArticleURL">
-	<portlet:param name="articleId" value="${article.getArticleId()}" />
+	<portlet:param name="articleId" value="${article.articleId}" />
 </portlet:actionURL>
 
 <portlet:renderURL var="backOnArticleViewURL">
+	<portlet:param name="pageChecker" value="/html/view.jsp" />
 </portlet:renderURL>
 
 <h3>

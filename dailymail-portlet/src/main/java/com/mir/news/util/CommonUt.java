@@ -30,39 +30,32 @@ public class CommonUt {
   }
 
   /**
-   * Get 'pageCheker' parameter. 'pageChecker' contain view directory to render.
+   * Get 'pageCheker' parameter. 'pageChecker' contain view directory to render. If pageCheker have
+   * invalid directory, returns default view.
    * 
    * @param renderRequest
    * @param renderResponse
    * @return
    */
   public String getViewPath(RenderRequest renderRequest, RenderResponse renderResponse) {
-
     String inputPage = renderRequest.getParameter("pageChecker");
+    System.out.println("IN3");
     if (inputPage != null) {
-      if (Views.REVIEWS_VIEW.equalsIgnoreCase(inputPage)) {
-        List<Review> reviews = null;
-        String articleId = renderRequest.getParameter("articleId");
-        try {
-          reviews = ReviewLocalServiceUtil.getArticleReviews(Long.parseLong(articleId));
-        } catch (NumberFormatException e) {
-          log.error(e.getMessage());
-        } catch (SystemException e) {
-          log.error(e.getMessage());
+      System.out.println(inputPage);
+      if (Views.getViews().contains(inputPage)) {
+        System.out.println("IN2");
+        if (Views.REVIEWS_VIEW.equalsIgnoreCase(inputPage)) {
+          List<Review> reviews = null;
+          String articleId = renderRequest.getParameter("articleId");
+          try {
+            reviews = ReviewLocalServiceUtil.getArticleReviews(Long.parseLong(articleId));
+          } catch (NumberFormatException e) {
+            log.error(e.getMessage());
+          } catch (SystemException e) {
+            log.error(e.getMessage());
+          }
+          renderRequest.setAttribute("reviews", reviews);
         }
-        renderRequest.setAttribute("reviews", reviews);
-        return inputPage;
-      }
-      if (Views.ARTICLE_REJECT_VIEW.equalsIgnoreCase(inputPage)) {
-        return inputPage;
-      }
-      if (Views.ARTICLE_EDIT.equalsIgnoreCase(inputPage)) {
-        return inputPage;
-      }
-      if (Views.ARTICLE_ADD.equalsIgnoreCase(inputPage)) {
-        return inputPage;
-      }
-      if (Views.REVIEW_ADD.equalsIgnoreCase(inputPage)) {
         return inputPage;
       }
     }
@@ -86,33 +79,11 @@ public class CommonUt {
 
   }
 
-  public Enum<Roles> getCurrentUserRole(ActionRequest actionRequest) {
+  public Roles getCurrentUserRole(PortletRequest portletRequest) {
 
-    ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+    ThemeDisplay themeDisp = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
     User user = themeDisp.getUser();
-    String authorRole = Roles.AUTHOR.toString();
-    String editorRole = Roles.EDITOR.toString();
-    String reviewerRole = Roles.REVIEWER.toString();
-    try {
-      for (Role role : user.getRoles()) {
-        if (role.getName().equalsIgnoreCase(authorRole)) {
-          return Roles.AUTHOR;
-        } else if (role.getName().equalsIgnoreCase(editorRole)) {
-          return Roles.EDITOR;
-        } else if (role.getName().equalsIgnoreCase(reviewerRole)) {
-          return Roles.REVIEWER;
-        }
-      }
-    } catch (SystemException e) {
-      log.error(e.getMessage());
-    }
-    return Roles.NONE;
-  }
 
-  public Enum<Roles> getCurrentUserRole(RenderRequest renderRequest) {
-
-    ThemeDisplay themeDisp = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-    User user = themeDisp.getUser();
     String authorRole = Roles.AUTHOR.toString();
     String editorRole = Roles.EDITOR.toString();
     String reviewerRole = Roles.REVIEWER.toString();

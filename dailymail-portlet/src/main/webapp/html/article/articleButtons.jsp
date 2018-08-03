@@ -54,7 +54,7 @@
 		</a>
 	</c:if>
 
-	<!-- P'U`B'L"ISHED -->
+	<!-- -->
 	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">

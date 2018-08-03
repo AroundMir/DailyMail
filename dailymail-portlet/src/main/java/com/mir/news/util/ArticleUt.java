@@ -12,6 +12,7 @@ import com.mir.news.consts.ArticleStatus;
 import com.mir.news.consts.Roles;
 import com.mir.news.model.Article;
 import com.mir.news.service.ArticleLocalServiceUtil;
+import com.mir.news.service.ReviewLocalServiceUtil;
 import com.mir.news.service.entity_srv.ArticleServiceImpl;
 import com.mir.news.service.entity_srv.ArticleSrv;
 
@@ -37,7 +38,7 @@ public class ArticleUt {
    */
   public void setPublishedArticles(ActionRequest actionRequest) throws SystemException {
 
-    List<Article> allArticles = articleService.findAll();
+    List<Article> allArticles = articleService.findAllArticles();
     List<Article> publishedArticles = new ArrayList<Article>();
     for (Article article : allArticles) {
       if (ArticleStatus.getStatusByString(article.getStatus()) == ArticleStatus.PUBLISHED) {
@@ -57,14 +58,15 @@ public class ArticleUt {
    */
   public void setArticlesOnConfirmation(ActionRequest actionRequest) throws SystemException {
 
-    Enum<Roles> role = commonUt.getCurrentUserRole(actionRequest);
+    Roles role = commonUt.getCurrentUserRole(actionRequest);
     long userId = commonUt.getCurrentUserId(actionRequest);
 
     if (role == Roles.AUTHOR) {
-      List<Article> authorArticles = getAuthorArticles(userId, articleService.findAll());
+      List<Article> authorArticles = getAuthorArticles(userId, articleService.findAllArticles());
       List<Article> finalAuthorArticles = new ArrayList<Article>();
-
+      
       for (Article article : authorArticles) {
+     
         String status = article.getStatus();
         if (ArticleStatus.getStatusByString(status) == ArticleStatus.CONFIRMATION) {
           finalAuthorArticles.add(article);
@@ -73,7 +75,7 @@ public class ArticleUt {
       actionRequest.setAttribute("articles", finalAuthorArticles);
     }
     if (role == Roles.EDITOR) {
-      List<Article> allArticles = articleService.findAll();
+      List<Article> allArticles = articleService.findAllArticles();
       List<Article> confirmArticles = new ArrayList<Article>();
 
       for (Article article : allArticles) {
@@ -97,7 +99,7 @@ public class ArticleUt {
 
     ThemeDisplay themeDisp = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
     long authorId = themeDisp.getUserId();
-    List<Article> authorArticles = getAuthorArticles(authorId, articleService.findAll());
+    List<Article> authorArticles = getAuthorArticles(authorId, articleService.findAllArticles());
     List<Article> finalAuthorArticles = new ArrayList<Article>();
 
     int commentCount = 0;

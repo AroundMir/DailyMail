@@ -11,13 +11,13 @@ import com.mir.news.model.Article;
 
 public interface ArticleSrv {
 	
-	public Article create(ActionRequest request) throws SystemException;
+	 Article createArticle(ActionRequest request) throws SystemException;
 	
-	public Article delete(ActionRequest request) throws SystemException, NumberFormatException, PortalException;
+	 Article deleteArticle(ActionRequest request) throws SystemException, NumberFormatException, PortalException;
 	
-	public Article update(ActionRequest request) throws SystemException, PortalException;
+	 Article updateArticle(ActionRequest request) throws SystemException, PortalException;
 	
-	public Article find(RenderRequest request) throws SystemException, NumberFormatException, PortalException;
+	 Article findArticle(RenderRequest request) throws SystemException, NumberFormatException, PortalException;
 	
-	public List<Article> findAll() throws SystemException;
+	 List<Article> findAllArticles() throws SystemException;
 }

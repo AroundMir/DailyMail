@@ -124,21 +124,43 @@ public class DailyMail extends MVCPortlet {
       throws SystemException {
     articleUtil.setEditingAuthorArticles(actionRequest);
   }
+  
+  /**
+   * Add new Article
+   * @param actionRequest
+   * @param actionResponse
+   * @throws SystemException
+   */
 
   public void addArticle(ActionRequest actionRequest, ActionResponse actionResponse)
       throws SystemException {
-    articleService.create(actionRequest);
+    articleService.createArticle(actionRequest);
   }
+  /**
+   * Delete article by Id;
+   * @param actionRequest
+   * @param actionResponse
+   * @throws SystemException
+   * @throws NumberFormatException
+   * @throws PortalException
+   */
 
   public void deleteArticle(ActionRequest actionRequest, ActionResponse actionResponse)
       throws SystemException, NumberFormatException, PortalException {
-    articleService.delete(actionRequest);
+    articleService.deleteArticle(actionRequest);
   }
+  
+  /**
+   * Update article
+   * @param actionRequest
+   * @param actionResponse
+   * @throws SystemException
+   */
 
   public void updateArticle(ActionRequest actionRequest, ActionResponse actionResponse)
       throws SystemException {
     try {
-      articleService.update(actionRequest);
+      articleService.updateArticle(actionRequest);
     } catch (PortalException e) {
       log.error(e.getMessage());
     }
@@ -153,7 +175,7 @@ public class DailyMail extends MVCPortlet {
    */
   public void setArticleAttribute(RenderRequest renderRequest) {
     try {
-      Article article = articleService.find(renderRequest);
+      Article article = articleService.findArticle(renderRequest);
       renderRequest.setAttribute("article", article);
     } catch (NumberFormatException e) {
 
@@ -163,24 +185,32 @@ public class DailyMail extends MVCPortlet {
       log.error(e.getMessage());
     }
   }
-
+  
   /**
-   * Change article status to "CONFIRMATION"
-   * 
+   * Add new review 
    * @param actionRequest
    * @param actionResponse
+   * @throws SystemException
    * @throws NumberFormatException
    * @throws PortalException
-   * @throws SystemException
    */
 
   public void addReview(ActionRequest actionRequest, ActionResponse actionResponse)
       throws SystemException, NumberFormatException, PortalException {
-    reviewService.create(actionRequest);
+    reviewService.createReview(actionRequest);
   }
+  
+  /**
+   * Delete review
+   * @param actionRequest
+   * @param actionResponse
+   * @throws NumberFormatException
+   * @throws SystemException
+   * @throws PortalException
+   */
 
   public void deleteReview(ActionRequest actionRequest, ActionResponse actionResponse)
       throws NumberFormatException, SystemException, PortalException {
-    reviewService.delete(actionRequest);
+    reviewService.deleteReview(actionRequest);
   }
 }

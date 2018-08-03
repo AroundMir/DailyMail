@@ -4,6 +4,7 @@
 </portlet:actionURL>
 
 <portlet:renderURL var="backOnArticleViewURL">
+	<portlet:param name="pageChecker" value="/html/view.jsp" />
 </portlet:renderURL>
 
 <h3>
@@ -11,11 +12,12 @@
 </h3>
 
 <aui:form action="${addArticleURL}">
-	<aui:input name="name" type="text" />
-	<aui:input name="text" type="text" />
+	<input name="name" type="text" />
+	<input name="text" type="text" />
 	<aui:button type="submit">
 	</aui:button>
 </aui:form>
+
 <a href="${backOnArticleViewURL}">
 	<button type="submit">
 		<liferay-ui:message key="cancel" />
