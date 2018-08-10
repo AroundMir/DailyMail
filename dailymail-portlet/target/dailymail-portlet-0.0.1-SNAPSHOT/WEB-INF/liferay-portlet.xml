@@ -6,8 +6,13 @@
 		<portlet-name>dailymail</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-javascript>https://code.jquery.com/jquery-3.3.1.min.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/main.js</header-portlet-javascript>
+		<header-portlet-javascript>https://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/table.js</header-portlet-javascript>
+		<header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js</header-portlet-javascript>
+		<css-class-wrapper>daily-mail</css-class-wrapper>
 	</portlet>
-	
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

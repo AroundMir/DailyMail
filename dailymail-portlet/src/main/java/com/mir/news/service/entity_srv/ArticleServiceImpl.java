@@ -45,6 +45,7 @@ public class ArticleServiceImpl implements ArticleSrv {
     article.setText(articleText);
     article.setStatus(ArticleStatus.EDITING.toString());
     article.setAuthorId(userID);
+    System.out.println(article);
     article = ArticleLocalServiceUtil.addArticle(article);
     return article;
   }

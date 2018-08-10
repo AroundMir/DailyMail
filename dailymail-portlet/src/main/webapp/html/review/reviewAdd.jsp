@@ -8,6 +8,7 @@
 <portlet:param name="pageChecker" value="/html/view.jsp" />
 </portlet:renderURL>
 
+>
 <h3><liferay-ui:message key="reviewAdd" /></h3>
 
 <aui:form action="${addReviewURL}">

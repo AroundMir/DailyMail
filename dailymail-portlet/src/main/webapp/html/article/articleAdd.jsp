@@ -12,8 +12,8 @@
 </h3>
 
 <aui:form action="${addArticleURL}">
-	<input name="name" type="text" />
-	<input name="text" type="text" />
+	<aui:input name="name" type="text" />
+	<aui:input name="text" type="text" />
 	<aui:button type="submit">
 	</aui:button>
 </aui:form>

@@ -39,11 +39,8 @@ public class CommonUt {
    */
   public String getViewPath(RenderRequest renderRequest, RenderResponse renderResponse) {
     String inputPage = renderRequest.getParameter("pageChecker");
-    System.out.println("IN3");
     if (inputPage != null) {
-      System.out.println(inputPage);
       if (Views.getViews().contains(inputPage)) {
-        System.out.println("IN2");
         if (Views.REVIEWS_VIEW.equalsIgnoreCase(inputPage)) {
           List<Review> reviews = null;
           String articleId = renderRequest.getParameter("articleId");

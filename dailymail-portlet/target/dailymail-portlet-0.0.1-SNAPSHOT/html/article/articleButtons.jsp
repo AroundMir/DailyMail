@@ -5,9 +5,11 @@
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
 </portlet:actionURL>
 
-<portlet:actionURL var="rejectArticleURL" name="setArticleEditStatus">
+<portlet:renderURL var="rejectArticleURL">
 	<portlet:param name="articleId" value="${article.getArticleId()}" />
-</portlet:actionURL>
+	<portlet:param name="pageChecker"
+		value="/html/article/articleReject.jsp" />
+</portlet:renderURL>
 
 <portlet:actionURL var="sendArticleOnConfirmationURL"
 	name="setArticleConfirmationStatus">
@@ -33,14 +35,13 @@
 	<portlet:param name="pageChecker" value="/html/review/reviewsView.jsp" />
 </portlet:renderURL>
 
-
 <c:if test="${currentRole.equalsIgnoreCase(AUTHOR)}">
 	<c:if test="${article.getStatus().equalsIgnoreCase('EDITING')}">
-		<a href="${deleteArticleURL}">
-			<button type="submit">
+		<form id="myId" action="${deleteArticleURL}" method="post">
+			<button class="delete" type="submit">
 				<liferay-ui:message key="deleteArticle" />
 			</button>
-		</a>
+		</form>
 		<a href="${editArticleURL}">
 			<button type="submit">
 				<liferay-ui:message key="editArticle" />
@@ -52,8 +53,8 @@
 			</button>
 		</a>
 	</c:if>
-	
-	<!-- P'U`B'L"ISHED -->
+
+	<!-- -->
 	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">
@@ -65,11 +66,11 @@
 
 <c:if test="${currentRole.equalsIgnoreCase(EDITOR)}">
 	<c:if test="${article.getStatus().equalsIgnoreCase('CONFIRMATION')}">
-		<a href="${deleteArticleURL}">
-			<button type="submit">
+		<form id="myId" action="${deleteArticleURL}" method="post">
+			<button class="delete" type="submit">
 				<liferay-ui:message key="deleteArticle" />
 			</button>
-		</a>
+		</form>
 		<a href="${publishArticleURL}">
 			<button type="submit">
 				<liferay-ui:message key="publishArticle" />
@@ -81,6 +82,7 @@
 			</button>
 		</a>
 	</c:if>
+
 	<c:if test="${article.getStatus().equalsIgnoreCase('PUBLISHED')}">
 		<a href="${checkReviewsURL}">
 			<button type="submit">
@@ -107,3 +109,4 @@
 		</button>
 	</a>
 </c:if>
+

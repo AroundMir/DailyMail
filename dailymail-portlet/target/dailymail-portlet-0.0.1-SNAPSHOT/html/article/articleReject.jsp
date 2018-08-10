@@ -1,7 +1,7 @@
 <%@ include file='/html/init.jsp'%>
 
-<portlet:actionURL name="updateArticle" var="editArticleURL">
-	<portlet:param name="articleId" value="${article.articleId}" />
+<portlet:actionURL name="updateArticle" var="rejectArticleURL">
+	<portlet:param name="articleId" value="${article.getArticleId()}" />
 </portlet:actionURL>
 
 <portlet:renderURL var="backOnArticleViewURL">
@@ -9,16 +9,15 @@
 </portlet:renderURL>
 
 <h3>
-	<liferay-ui:message key="editArticle" />
+	<liferay-ui:message key="reject" />
 </h3>
 
-
-<aui:form action="${editArticleURL}">
-	<aui:input name="name" value="${article.getName()}" type="text" />
-	<aui:input name="text" value="${article.getText()}" type="text" />
+<aui:form action="${rejectArticleURL}">
+	<aui:input name="editorComment" type="text" />
 	<aui:button type="submit">
 	</aui:button>
 </aui:form>
+
 <a href="${backOnArticleViewURL}">
 	<button type="submit">
 		<liferay-ui:message key="cancel" />
